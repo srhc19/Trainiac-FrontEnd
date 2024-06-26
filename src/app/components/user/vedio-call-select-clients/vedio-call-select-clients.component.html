@@ -1,0 +1,163 @@
+<div class="maincontainer">
+  <div class="flex min-h-16 items-center justify-between text-white">
+    <div class="title ml-3">Trainiac</div>
+    <div class="flex items-center space-x-4 mr-3">
+      <img
+        src="{{ trainerData.profileimage }}"
+        alt="{{ trainerData.name }}"
+        class="w-8 h-8 rounded-full object-cover border border-gray-300"
+      />
+      <span
+        (click)="profile()"
+        class="text-gray-700 font-semibold cursor-pointer hover:text-gray-900"
+      >
+        {{ trainerData.name }}
+      </span>
+      <div
+        class="hamburger-menu cursor-pointer space-y-1.5"
+        (click)="toggleDropdown()"
+      >
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+      </div>
+    </div>
+  </div>
+  <div class="secondcontainer">
+    <app-navlinks class="pagelinks shadow-md hover:shadow-xl"></app-navlinks>
+    <div class="content flex justify-between shadow-md hover:shadow-xl">
+      <div>
+        <div class="searchbar">
+          <div class="input-group">
+            <input
+              type="search"
+              class="form-control rounded"
+              placeholder="Search"
+              aria-label="Search"
+              aria-describedby="search-addon"
+              [(ngModel)]="searchQuery"
+            />
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              (click)="performSearch()"
+            >
+              search
+            </button>
+          </div>
+          <div class="flex flex-row">
+            <button class="btn-style link-btn" (click)="startVedioSession()">
+              Start Vedio Session
+            </button>
+            <app-payment
+              *ngIf="trainerData.premium.paid === false"
+            ></app-payment>
+          </div>
+        </div>
+        <div class="tablecontainer overflow-auto">
+          <table class="table-auto w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b-2 border-gray-300">
+                <th scope="col" class="p-2 text-gray-600">S.No</th>
+                <th scope="col" class="p-2 text-gray-600">Name</th>
+                <th scope="col" class="p-2 text-gray-600">Email</th>
+                <th scope="col" class="p-2 text-gray-600">Select Client</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let items of clientlist; let i = index"
+                class="border-b border-gray-200 hover:bg-gray-100"
+              >
+                <th scope="row" class="p-2 text-gray-800">{{ i + 1 }}</th>
+                <td class="p-2 text-gray-800">{{ items.name }}</td>
+                <td class="p-2 text-gray-800">{{ items.email }}</td>
+                <td class="p-2">
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input cursor-pointer"
+                      type="checkbox"
+                      role="switch"
+                      (change)="toggleChecked(items._id)"
+                      id="flexSwitchCheckDefault{{ i }}"
+                    />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <nav aria-label="Page navigation example fixed bottom-0 left-0">
+        <ul class="pagination">
+          <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">
+            <a
+              class="page-link"
+              aria-label="Previous"
+              (click)="onPageChange(currentPage - 1)"
+            >
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li
+            class="page-item"
+            *ngFor="let page of getPageNumbers()"
+            [ngClass]="{ active: page === currentPage }"
+          >
+            <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+          </li>
+          <li
+            class="page-item"
+            [ngClass]="{ disabled: currentPage === getTotalPages() }"
+          >
+            <a
+              class="page-link"
+              aria-label="Next"
+              (click)="onPageChange(currentPage + 1)"
+            >
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="dropdown-menu" id="dropdown-menu">
+        <a href="" class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Clients</a
+        >
+        <a
+          (click)="calender()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Calendar</a
+        >
+        <a
+          (click)="blogs()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Blogs</a
+        >
+        <a
+          (click)="chatsystem()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Messages</a
+        >
+        <a
+          (click)="videoCallSelectClient()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Video Session</a
+        >
+        <a
+          (click)="clientRequest()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Client Request</a
+        >
+        <button
+          (click)="logout()"
+          class="w-full text-left px-4 py-2 bg-red-600 hover:bg-red-700 text-white"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

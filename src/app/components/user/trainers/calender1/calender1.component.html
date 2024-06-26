@@ -1,0 +1,362 @@
+<div class="maincontainer">
+  <div class="flex min-h-16 items-center justify-between text-white">
+    <div class="title ml-3">Trainiac</div>
+    <div class="flex items-center space-x-4 mr-3">
+      <img
+        src="{{ trainerData.profileimage }}"
+        alt="{{ trainerData.name }}"
+        class="w-8 h-8 rounded-full object-cover border border-gray-300"
+      />
+      <span
+        (click)="profile()"
+        class="text-gray-700 font-semibold cursor-pointer hover:text-gray-900"
+      >
+        {{ trainerData.name }}
+      </span>
+      <div
+        class="hamburger-menu cursor-pointer space-y-1.5"
+        (click)="toggleDropdown()"
+      >
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+      </div>
+    </div>
+  </div>
+  <div class="secondcontainer bg-gray-100">
+    <div class="pagelinks bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl">
+      <div class="links space-y-4">
+        <h5 class="link">
+          <a (click)="clientList()" class="text-gray-400 hover:text-gray-900"
+            >Clients</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="calender()" class="text-gray-400 hover:text-gray-900"
+            >Calender</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="blogs()" class="text-gray-400 hover:text-gray-900"
+            >Blogs</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="chatsystem()" class="text-gray-400 hover:text-gray-900"
+            >Messages</a
+          >
+        </h5>
+        <h5 class="link">
+          <a
+            (click)="videoCallSelectClient()"
+            class="text-gray-400 hover:text-gray-900"
+            >Video Session</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="clientRequest()" class="text-gray-400 hover:text-gray-900"
+            >clientRequest</a
+          >
+        </h5>
+        <button
+          class="btn-style link-btn bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+    <div class="content shadow-md hover:shadow-xl">
+      <div class="searchbar flex justify-between align-middle items-center">
+        <div class="add-task">
+          <!-- Button to open modal -->
+          <button
+            type="button"
+            class="modal_btn btn-style link-btn dropDownClientList"
+            (click)="openyogaModal()"
+          >
+            Add Yoga
+          </button>
+          <button
+            type="button"
+            class="modal_btn btn-style link-btn dropDownClientList"
+            (click)="opencardioModal()"
+          >
+            Add Cardio
+          </button>
+          <button
+            type="button"
+            class="modal_btn btn-style link-btn dropDownClientList"
+            (click)="opengymModal()"
+          >
+            Add Workout
+          </button>
+        </div>
+        <div class="relative inline-block text-left">
+          <div>
+            <button
+              type="button"
+              class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold t shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+              style="color: #555"
+              id="menu-button"
+              (click)="dropdown()"
+            >
+              Select Client
+              <svg
+                class="-mr-1 h-5 w-5 text-gray-400"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            aria-orientation="vertical"
+            aria-labelledby="menu-button"
+            tabindex="-1"
+            [class.hidden]="dropdownfunction"
+          >
+            <div
+              *ngFor="let list of clientlist; let i = index"
+              class="py-1 dropDownClientList"
+              role="none"
+              class="flex-row shadow-md g-2 p-2"
+            >
+              <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+              <div
+                *ngIf="clientlist"
+                (click)="getnewClientsDetails(list.client_id)"
+              >
+                <span class="mr-2">{{ i + 1 }}.</span>{{ list.name }}
+              </div>
+              <div
+                class="ml-4"
+                *ngIf="clientlist"
+                (click)="getnewClientsDetails(list.client_id)"
+              >
+                {{ list.email }}
+              </div>
+            </div>
+          </div>
+          <div class="font-bold text-gray-800 p-4 bg-gray-100 rounded-lg">
+            <strong>Current Client:</strong>
+            {{ clientDetails ? clientDetails.name : "" }}
+          </div>
+        </div>
+      </div>
+      <!-- <app-addnew-client></app-addnew-client> -->
+      <div class="trainerlist-container bg-gray-50">
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <button class="navigation-btn" (click)="prevMonth()">
+              &#8249;
+            </button>
+            <h2 class="current-month">{{ currentMonth }}</h2>
+            <h2 class="current-year">{{ currentYear }}</h2>
+            <button class="navigation-btn" (click)="nextMonth()">
+              &#8250;
+            </button>
+          </div>
+          <div class="calendar">
+            <div class="calendar-grid flex justify-between">
+              <div
+                *ngFor="let day of days"
+                class="calendar-day glass-container"
+              >
+                <div class="day-header">
+                  {{ day }}
+                  <span class="ml-6"
+                    ><button
+                      (click)="removeWorkout(day)"
+                      class="btn-style link-btn"
+                    >
+                      Remove Workout
+                    </button></span
+                  >
+                </div>
+
+                <div class="task-list">
+                  <!-- Task management UI -->
+                  <div *ngIf="getTasksForDay(day).length > 0; else noWorkout">
+                    <div
+                      *ngFor="let workoutRoutine of getTasksForDay(day)"
+                      class="task"
+                    >
+                      <div class="text-left">
+                        <h3 class="text-left">
+                          {{ workoutRoutine.type }} Workout
+                        </h3>
+
+                        <ng-container *ngIf="workoutRoutine.type === 'CARDIO'">
+                          <p class="text-left">
+                            Activity: {{ workoutRoutine.details.activity
+                            }}<br />
+                            Intensity: {{ workoutRoutine.details.intensity
+                            }}<br />
+                            Duration: {{ workoutRoutine.details.duration }}
+                          </p>
+                        </ng-container>
+                        <ng-container *ngIf="workoutRoutine.type === 'GYM'">
+                          <p class="text-left">
+                            Target Muscle Group:
+                            {{ workoutRoutine.details.targetMuscleGroup }}
+                          </p>
+                          <ul class="text-left ml-0">
+                            <li
+                              *ngFor="
+                                let exercise of workoutRoutine.details.exercises
+                              "
+                              class="text-left ml-0"
+                            >
+                              {{ exercise.name }}: {{ exercise.sets }} sets,
+                              {{ exercise.reps }} reps ({{ exercise.weight }})
+                            </li>
+                          </ul>
+                        </ng-container>
+                        <ng-container
+                          *ngIf="workoutRoutine.type === 'REST'"
+                          class="restbox"
+                        >
+                          <div class="restbox text-left">
+                            <p class="text-left">Take Rest and Recover</p>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="workoutRoutine.type === 'YOGA'">
+                          <p class="text-left">
+                            Activity: {{ workoutRoutine.details.activity
+                            }}<br />
+                            Duration: {{ workoutRoutine.details.duration }}
+                          </p>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div *ngIf="getTasksForDay(day).length > 0; else noWorkout">
+                    <div
+                      *ngFor="let workoutRoutine of getTasksForDay(day)"
+                      class="task"
+                    >
+                      <div >
+                        <h3>{{ workoutRoutine.type }} Workout</h3>
+
+                        <ng-container *ngIf="workoutRoutine.type === 'CARDIO'">
+                          <p>
+                            Activity: {{ workoutRoutine.details.activity
+                            }}<br />
+                            Intensity: {{ workoutRoutine.details.intensity
+                            }}<br />
+                            Duration: {{ workoutRoutine.details.duration }}
+                          </p>
+                        </ng-container>
+                        <ng-container *ngIf="workoutRoutine.type === 'GYM'">
+                          <p>
+                            Target Muscle Group:
+                            {{ workoutRoutine.details.targetMuscleGroup }}
+                          </p>
+                          <ul>
+                            <li
+                              *ngFor="
+                                let exercise of workoutRoutine.details.exercises
+                              "
+                            >
+                              {{ exercise.name }}: {{ exercise.sets }} sets,
+                              {{ exercise.reps }} reps ({{ exercise.weight }})
+                            </li>
+                          </ul>
+                        </ng-container>
+                        <ng-container
+                          *ngIf="workoutRoutine.type === 'REST'"
+                          class="restbox"
+                        >
+                          <div class="restbox">
+                            <P>Take Rest and Recover </P>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="workoutRoutine.type === 'YOGA'">
+                          <p>
+                            Activity: {{ workoutRoutine.details.activity
+                            }}<br />
+
+                            Duration: {{ workoutRoutine.details.duration }}
+                          </p>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div> -->
+                  <ng-template #noWorkout>
+                    <div class="restbox">
+                      <h3>REST DAY</h3>
+                      <P>Take Rest and Recover </P>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown-menu" id="dropdown-menu">
+        <a href="" class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Clients</a
+        >
+        <a
+          (click)="calender()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Calendar</a
+        >
+        <a
+          (click)="blogs()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Blogs</a
+        >
+        <a
+          (click)="chatsystem()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Messages</a
+        >
+        <a
+          (click)="videoCallSelectClient()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Video Session</a
+        >
+        <a
+          (click)="clientRequest()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Client Request</a
+        >
+        <button
+          class="w-full text-left px-4 py-2 bg-red-600 hover:bg-red-700 text-white"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-cardio-modal
+  id="cardioModal"
+  [class.hidden]="cardioModal"
+  (closemodal)="closeCardioModal()"
+></app-cardio-modal>
+<app-gym-modal
+  id="gymModal"
+  [class.hidden]="gymModal"
+  (closemodal)="closeGymModal()"
+></app-gym-modal>
+<app-yoga-modal
+  id="yogaModal"
+  [class.hidden]="yogaModal"
+  (closemodal)="closeYogaModal()"
+></app-yoga-modal>
+<!--  -->

@@ -1,0 +1,450 @@
+<div class="maincontainer">
+  <div class="flex min-h-16 items-center justify-between text-white">
+    <div class="title ml-3">Trainiac</div>
+    <div class="flex items-center space-x-4">
+      <!-- <button class="btn-style link-btn">Add Blog</button> -->
+      <!-- <span (click)="profile()" style="color: #555">S.c</span> -->
+      <div
+        class="hamburger-menu cursor-pointer space-y-1.5"
+        (click)="toggleDropdown()"
+      >
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+      </div>
+    </div>
+  </div>
+  <div class="secondcontainer">
+    <div class="pagelinks bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl">
+      <div class="links space-y-4">
+        <h5 class="link">
+          <a (click)="trainerslist()" class="text-gray-400 hover:text-gray-900"
+            >Trainers</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="calender()" class="text-gray-400hover:text-gray-900"
+            >Calender</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="clientBlogList()" class="text-gray-400hover:text-gray-900"
+            >Blogs</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="workoutlist()" class="text-gray-400hover:text-gray-900"
+            >Workout Lists</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="chatsystem()" class="text-gray-400hover:text-gray-900"
+            >Messages</a
+          >
+        </h5>
+        <h5 class="link">
+          <a
+            (click)="ProgressTracker()"
+            class="text-gray-400hover:text-gray-900"
+            >Progress Tracker</a
+          >
+        </h5>
+        <button
+          class="btn-style link-btn bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+    <div class="content shadow-md hover:shadow-xl">
+      <!-- src/app/progress-form/progress-form.component.html -->
+      <div class="container mx-auto p-6">
+        <form
+          [formGroup]="progressForm"
+          (ngSubmit)="onSubmit()"
+          class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        >
+          <!-- Weight -->
+          <div class="form-group mb-4">
+            <label
+              for="currentWeight"
+              class="block text-gray-700 text-sm font-bold mb-2"
+              >Current Weight (kg)</label
+            >
+            <input
+              type="number"
+              id="currentWeight"
+              formControlName="currentWeight"
+              class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              min="0"
+              max="300"
+            />
+            <div
+              *ngIf="
+                progressForm.get('currentWeight')?.touched &&
+                progressForm.get('currentWeight')?.invalid
+              "
+              class="error mt-2 text-red-500 text-sm"
+            >
+              <div
+                *ngIf="progressForm.get('currentWeight')?.errors?.['required']"
+              >
+                Current weight is required.
+              </div>
+              <div *ngIf="progressForm.get('currentWeight')?.errors?.['min']">
+                Current weight must be at least 0.
+              </div>
+              <div *ngIf="progressForm.get('currentWeight')?.errors?.['max']">
+                Current weight cannot exceed 300 kg.
+              </div>
+            </div>
+          </div>
+
+          <!-- Body Circumferences -->
+          <div class="form-group mb-4">
+            <label
+              for="waist"
+              class="block text-gray-700 text-sm font-bold mb-2"
+              >Waist (cm)</label
+            >
+            <input
+              type="number"
+              id="waist"
+              formControlName="waist"
+              class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              min="0"
+              max="200"
+            />
+            <div
+              *ngIf="
+                progressForm.get('waist')?.touched &&
+                progressForm.get('waist')?.invalid
+              "
+              class="error mt-2 text-red-500 text-sm"
+            >
+              <div *ngIf="progressForm.get('waist')?.errors?.['required']">
+                Waist measurement is required.
+              </div>
+              <div *ngIf="progressForm.get('waist')?.errors?.['min']">
+                Waist measurement must be at least 0.
+              </div>
+              <div *ngIf="progressForm.get('waist')?.errors?.['max']">
+                Waist measurement cannot exceed 200 cm.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <label for="hips" class="block text-gray-700 text-sm font-bold mb-2"
+              >Hips (cm)</label
+            >
+            <input
+              type="number"
+              id="hips"
+              formControlName="hips"
+              class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              min="0"
+              max="200"
+            />
+            <div
+              *ngIf="
+                progressForm.get('hips')?.touched &&
+                progressForm.get('hips')?.invalid
+              "
+              class="error mt-2 text-red-500 text-sm"
+            >
+              <div *ngIf="progressForm.get('hips')?.errors?.['required']">
+                Hips measurement is required.
+              </div>
+              <div *ngIf="progressForm.get('hips')?.errors?.['min']">
+                Hips measurement must be at least 0.
+              </div>
+              <div *ngIf="progressForm.get('hips')?.errors?.['max']">
+                Hips measurement cannot exceed 200 cm.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <label
+              for="chest"
+              class="block text-gray-700 text-sm font-bold mb-2"
+              >Chest (cm)</label
+            >
+            <input
+              type="number"
+              id="chest"
+              formControlName="chest"
+              class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              min="0"
+              max="200"
+            />
+            <div
+              *ngIf="
+                progressForm.get('chest')?.touched &&
+                progressForm.get('chest')?.invalid
+              "
+              class="error mt-2 text-red-500 text-sm"
+            >
+              <div *ngIf="progressForm.get('chest')?.errors?.['required']">
+                Chest measurement is required.
+              </div>
+              <div *ngIf="progressForm.get('chest')?.errors?.['min']">
+                Chest measurement must be at least 0.
+              </div>
+              <div *ngIf="progressForm.get('chest')?.errors?.['max']">
+                Chest measurement cannot exceed 200 cm.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <label for="arms" class="block text-gray-700 text-sm font-bold mb-2"
+              >Arms (biceps, triceps) (cm)</label
+            >
+            <input
+              type="number"
+              id="arms"
+              formControlName="arms"
+              class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              min="0"
+              max="100"
+            />
+            <div
+              *ngIf="
+                progressForm.get('arms')?.touched &&
+                progressForm.get('arms')?.invalid
+              "
+              class="error mt-2 text-red-500 text-sm"
+            >
+              <div *ngIf="progressForm.get('arms')?.errors?.['required']">
+                Arms measurement is required.
+              </div>
+              <div *ngIf="progressForm.get('arms')?.errors?.['min']">
+                Arms measurement must be at least 0.
+              </div>
+              <div *ngIf="progressForm.get('arms')?.errors?.['max']">
+                Arms measurement cannot exceed 100 cm.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <label for="legs" class="block text-gray-700 text-sm font-bold mb-2"
+              >Legs (thighs) (cm)</label
+            >
+            <input
+              type="number"
+              id="legs"
+              formControlName="legs"
+              class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              min="0"
+              max="150"
+            />
+            <div
+              *ngIf="
+                progressForm.get('legs')?.touched &&
+                progressForm.get('legs')?.invalid
+              "
+              class="error mt-2 text-red-500 text-sm"
+            >
+              <div *ngIf="progressForm.get('legs')?.errors?.['required']">
+                Legs measurement is required.
+              </div>
+              <div *ngIf="progressForm.get('legs')?.errors?.['min']">
+                Legs measurement must be at least 0.
+              </div>
+              <div *ngIf="progressForm.get('legs')?.errors?.['max']">
+                Legs measurement cannot exceed 150 cm.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <label
+              for="calves"
+              class="block text-gray-700 text-sm font-bold mb-2"
+              >Calves (cm)</label
+            >
+            <input
+              type="number"
+              id="calves"
+              formControlName="calves"
+              class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              min="0"
+              max="100"
+            />
+            <div
+              *ngIf="
+                progressForm.get('calves')?.touched &&
+                progressForm.get('calves')?.invalid
+              "
+              class="error mt-2 text-red-500 text-sm"
+            >
+              <div *ngIf="progressForm.get('calves')?.errors?.['required']">
+                Calves measurement is required.
+              </div>
+              <div *ngIf="progressForm.get('calves')?.errors?.['min']">
+                Calves measurement must be at least 0.
+              </div>
+              <div *ngIf="progressForm.get('calves')?.errors?.['max']">
+                Calves measurement cannot exceed 100 cm.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <label
+              for="forearms"
+              class="block text-gray-700 text-sm font-bold mb-2"
+              >Forearms (cm)</label
+            >
+            <input
+              type="number"
+              id="forearms"
+              formControlName="forearms"
+              class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              min="0"
+              max="100"
+            />
+            <div
+              *ngIf="
+                progressForm.get('forearms')?.touched &&
+                progressForm.get('forearms')?.invalid
+              "
+              class="error mt-2 text-red-500 text-sm"
+            >
+              <div *ngIf="progressForm.get('forearms')?.errors?.['required']">
+                Forearms measurement is required.
+              </div>
+              <div *ngIf="progressForm.get('forearms')?.errors?.['min']">
+                Forearms measurement must be at least 0.
+              </div>
+              <div *ngIf="progressForm.get('forearms')?.errors?.['max']">
+                Forearms measurement cannot exceed 100 cm.
+              </div>
+            </div>
+          </div>
+
+          <!-- Body Composition -->
+          <div class="form-group mb-4">
+            <label
+              for="bodyFatPercentage"
+              class="block text-gray-700 text-sm font-bold mb-2"
+              >Body Fat Percentage (%)</label
+            >
+            <input
+              type="number"
+              id="bodyFatPercentage"
+              formControlName="bodyFatPercentage"
+              class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              min="0"
+              max="100"
+            />
+            <div
+              *ngIf="
+                progressForm.get('bodyFatPercentage')?.touched &&
+                progressForm.get('bodyFatPercentage')?.invalid
+              "
+              class="error mt-2 text-red-500 text-sm"
+            >
+              <div
+                *ngIf="progressForm.get('bodyFatPercentage')?.errors?.['min']"
+              >
+                Body fat percentage must be at least 0.
+              </div>
+              <div
+                *ngIf="progressForm.get('bodyFatPercentage')?.errors?.['max']"
+              >
+                Body fat percentage cannot exceed 100%.
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress Photos -->
+          <div class="form-group mb-4">
+            <label
+              for="frontPhoto"
+              class="block text-gray-700 text-sm font-bold mb-2"
+              >Front View Photo</label
+            >
+            <input
+              type="file"
+              id="frontPhoto"
+              (change)="onFileChange($event, 'frontPhoto')"
+              class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              accept="image/*"
+            />
+          </div>
+          <div class="form-group mb-4">
+            <label
+              for="sidePhoto"
+              class="block text-gray-700 text-sm font-bold mb-2"
+              >Side View Photo</label
+            >
+            <input
+              type="file"
+              id="sidePhoto"
+              (change)="onFileChange($event, 'sidePhoto')"
+              class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              accept="image/*"
+            />
+          </div>
+          <div class="form-group mb-4">
+            <label
+              for="backPhoto"
+              class="block text-gray-700 text-sm font-bold mb-2"
+              >Back View Photo</label
+            >
+            <input
+              type="file"
+              id="backPhoto"
+              (change)="onFileChange($event, 'backPhoto')"
+              class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              accept="image/*"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+
+      <div class="dropdown-menu" id="dropdown-menu">
+        <a href="" class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Trainers</a
+        >
+        <a
+          (click)="calender()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Calendar</a
+        >
+        <a
+          (click)="clientBlogList()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Blogs</a
+        >
+        <a
+          (click)="workoutlist()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Workout Lists</a
+        >
+        <a
+          (click)="chatsystem()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Messages</a
+        >
+        <a
+          (click)="ProgressTracker()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Progress Tracker</a
+        >
+        <button
+          class="w-full text-left px-4 py-2 bg-red-600 hover:bg-red-700 text-white"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

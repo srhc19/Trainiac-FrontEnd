@@ -1,0 +1,120 @@
+.primary-heading {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-family: "Lora", serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d9d9d920;
+  color: #7b7777;
+  min-height: 80px;
+}
+.primary-heading h2 {
+  font-family: "Lora", serif;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 6px;
+}
+.secondary-container {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 150px;
+  justify-content: center;
+}
+@media screen and (max-width: 700px) {
+  .secondary-container {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+
+    justify-content: center;
+  }
+  .contentsecond {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .imagesecond {
+    display: flex;
+    justify-content: center;
+  }
+}
+.imagesecond {
+  display: flex;
+  justify-content: start;
+  max-width: 700px;
+  height: auto;
+  /* background-color: #d9d9d9; */
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.image-container {
+  display: flex;
+  justify-content: end;
+  max-width: 700px;
+  height: auto;
+  /* background-color: #d9d9d9; */
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+img {
+  min-width: 550px;
+  max-height: 320px;
+  object-fit: cover;
+  background-color: #d9d9d9;
+  /* padding: 10px;*/
+  border-radius: 10px;
+}
+.content {
+  color: #333333;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f5f4;
+  padding: 30px;
+}
+.contentsecond {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding-left: 150px;
+}
+p,
+h6 {
+  font-family: "Lora", serif;
+  line-height: 1.6;
+}
+.getstarted-btn {
+  background-color: #d9d9d9;
+  color: #333333;
+  max-width: 150px;
+}
+.btn-container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  img {
+    scale: 0.8;
+    opacity: 0;
+    animation: fade-in linear forwards;
+    animation-timeline: view();
+    animation-range: 200px 500px;
+  }
+  @keyframes fade-in {
+    to {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+}
+h3 {
+  font-family: "Lora", serif;
+}

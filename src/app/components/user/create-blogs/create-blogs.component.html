@@ -1,0 +1,165 @@
+<div class="main-container">
+  <div class="flex min-h-16 items-center justify-between text-white">
+    <div class="title text-black ml-3">Trainiac</div>
+    <div class="nav-right">
+      <!-- <span class="profilename text-black">S.c</span> -->
+      <div class="hamburger-menu" (click)="toggleDropdown()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-row gap-10">
+    <div><app-navlinks class="pagelinks"></app-navlinks></div>
+    <div class="content">
+      <form
+        *ngIf="blogForm"
+        [formGroup]="blogForm"
+        (ngSubmit)="onSubmit()"
+        enctype="multipart/form-data"
+      >
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            id="title"
+            class="form-control"
+            formControlName="title"
+            required
+          />
+          <div
+            *ngIf="
+              blogForm.get('title')?.touched && blogForm.get('title')?.invalid
+            "
+            class="text-danger"
+          >
+            <div *ngIf="blogForm.get('title')?.errors?.['required']">
+              Title is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input
+            type="text"
+            id="author"
+            class="form-control"
+            formControlName="author"
+            required
+          />
+          <div
+            *ngIf="
+              blogForm.get('author')?.touched && blogForm.get('author')?.invalid
+            "
+            class="text-danger"
+          >
+            <div *ngIf="blogForm.get('author')?.errors?.['required']">
+              Author is required
+            </div>
+            <div *ngIf="blogForm.get('author')?.errors?.['maxlength']">
+              Author name cannot exceed 15 characters
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="image">Add Image Min-Size: (2560 x 1440)</label>
+          <input
+            type="file"
+            id="image"
+            class="form-control"
+            formControlName="image"
+            (change)="onFileSelected($event)"
+            required
+            accept="image/*"
+          />
+          <div *ngIf="imageDimensions">
+            <p>
+              Selected image dimensions: {{ imageDimensions.width }} x
+              {{ imageDimensions.height }} pixels
+            </p>
+          </div>
+          <div
+            *ngIf="blogForm.get('image')?.touched && !isFileValid"
+            class="text-danger"
+          >
+            <div *ngIf="blogForm.get('image')?.errors?.['required']">
+              Image is required
+            </div>
+            <div>{{ errorMessage }}</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="content">Content</label>
+          <div formGroupName="content">
+            <div formArrayName="paragraphs">
+              <div *ngFor="let paragraph of paragraphs.controls; let i = index">
+                <textarea
+                  class="form-control"
+                  placeholder="Paragraph"
+                  [formControlName]="i"
+                  required
+                ></textarea>
+                <div
+                  *ngIf="paragraph.touched && paragraph.invalid"
+                  class="text-danger"
+                >
+                  <div *ngIf="paragraph.errors?.['required']">
+                    Paragraph is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn-style btn link-btn"
+              (click)="addParagraph()"
+            >
+              Add Paragraph
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!isFileValid">
+          Publish Blog
+        </button>
+        <p *ngIf="errorMessage">{{ errorMessage }}</p>
+      </form>
+
+      <div class="dropdown-menu" id="dropdown-menu">
+        <a href="" class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Trainers</a
+        >
+        <a
+          (click)="calender()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Calendar</a
+        >
+        <a
+          (click)="clientBlogList()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Blogs</a
+        >
+        <a
+          (click)="workoutlist()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Workout Lists</a
+        >
+        <a
+          (click)="chatsystem()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Messages</a
+        >
+        <a
+          (click)="ProgressTracker()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Progress Tracker</a
+        >
+        <button
+          class="w-full text-left px-4 py-2 bg-red-600 hover:bg-red-700 text-white"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

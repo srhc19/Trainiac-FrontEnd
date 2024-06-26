@@ -1,0 +1,124 @@
+<div id="gymModal">
+  <div class="gymmodal-dialog gymmodal-lg">
+    <div class="gymmodal-content">
+      <div class="gymmodal-header flex justify-between align-middle">
+        <h5 class="gymmodal-title" id="gymModalLabel">Add Gym Workout</h5>
+        <button
+          type="button"
+          class="close closesvg"
+          (click)="closeModalClick()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="gymForm">
+          <div class="form-group">
+            <label for="selectClient">Select Client:</label>
+            <select
+              class="form-control"
+              id="selectClient"
+              formControlName="clientEmail"
+            >
+              <option value="">Select Client</option>
+              <option *ngFor="let client of clientlist" [value]="client.email">
+                {{ client.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="workoutDate">Date:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="workoutDate"
+              formControlName="workoutDate"
+            />
+          </div>
+          <div class="form-group">
+            <label for="gymTargetMuscleGroup">Target Muscle Group:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="gymTargetMuscleGroup"
+              formControlName="targetMuscleGroup"
+            />
+          </div>
+          <div class="form-group" formArrayName="exercises">
+            <label for="gymExercises">Exercises:</label>
+            <ul>
+              <li
+                *ngFor="let exercise of exercises.controls; let i = index"
+                [formGroupName]="i"
+              >
+                <div class="d-flex justify-content-between">
+                  <input
+                    type="text"
+                    class="form-control mr-2"
+                    formControlName="name"
+                    placeholder="Exercise Name"
+                  />
+                  <div
+                    class="d-flex max-h-11 justify-evenly align-middle items-center"
+                  >
+                    <input
+                      type="number"
+                      class="form-control mr-2"
+                      formControlName="sets"
+                      placeholder="Sets"
+                      min="0"
+                    />
+                    <input
+                      type="number"
+                      class="form-control mr-2"
+                      formControlName="reps"
+                      placeholder="Reps"
+                      min="0"
+                    />
+                    <input
+                      type="number"
+                      class="form-control"
+                      formControlName="weight"
+                      placeholder="Weight (optional)"
+                      min="0"
+                    />
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-danger ml-1 link-btn"
+                      (click)="removeExercise(i)"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <button
+              type="button"
+              class="btn btn-primary btn-sm mt-3"
+              (click)="addExercise()"
+            >
+              Add Exercise
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary link-btn"
+          (click)="closeModalClick()"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary link-btn"
+          (click)="addGymWorkout()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

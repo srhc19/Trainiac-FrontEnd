@@ -1,0 +1,78 @@
+<div id="yogaModal">
+  <div class="yogamodal-dialog">
+    <div class="yogamodal-content">
+      <div class="yogamodal-header flex justify-between align-middle">
+        <h5 class="yogamodal-title">Add Yoga Workout</h5>
+        <button
+          type="button"
+          class="close closesvg"
+          (click)="closeModalClick()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="yogaForm">
+          <div class="form-group">
+            <label for="selectClient">Select Client:</label>
+            <select
+              class="form-control"
+              id="selectClient"
+              formControlName="clientEmail"
+            >
+              <option value="">Select Client</option>
+              <option *ngFor="let client of clientlist" [value]="client.email">
+                {{ client.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="workoutDate">Date:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="workoutDate"
+              formControlName="workoutDate"
+            />
+          </div>
+          <div class="form-group">
+            <label for="yogaActivity">Activity:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="yogaActivity"
+              formControlName="activity"
+            />
+          </div>
+          <div class="form-group">
+            <label for="yogaDuration">Duration (minutes):</label>
+            <input
+              type="number"
+              class="form-control"
+              id="yogaDuration"
+              formControlName="duration"
+              min="0"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary link-btn"
+          data-dismiss="modal"
+          (click)="closeModalClick()"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary link-btn"
+          (click)="addYogaWorkout()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

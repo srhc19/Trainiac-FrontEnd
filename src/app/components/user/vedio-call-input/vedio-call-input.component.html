@@ -1,0 +1,15 @@
+<form [formGroup]="FormGroup" class="flex flex-row g-10">
+  <input
+    type="text"
+    class="formControl"
+    placeholder="Paste the link"
+    formControlName="link"
+  />
+  <input
+    type="text"
+    class="formControl"
+    placeholder="Enter clients Email"
+    formControlName="email"
+  />
+  <button class="btn-style" (click)="OnSubmit()">Send</button>
+</form>

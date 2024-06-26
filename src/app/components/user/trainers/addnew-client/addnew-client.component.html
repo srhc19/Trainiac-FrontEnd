@@ -1,0 +1,45 @@
+<div class="formcontainer">
+  <form
+    [formGroup]="clientForm"
+    (ngSubmit)="onSubmit()"
+    class="flex-row justify-start items-center align-middle"
+  >
+    <div class="flex-col">
+      <input
+        type="text"
+        id="clientName"
+        formControlName="clientName"
+        placeholder="client Name"
+      />
+      <!-- <div
+      *ngIf="
+        clientForm.get('clientName')?.invalid &&
+        clientForm.get('clientName')?.touched
+      "
+    >
+      <span *ngIf="clientForm.get('clientName')?.errors"
+        >Client Name is required</span
+      >
+    </div> -->
+    </div>
+    <div class="flex-row mx-4">
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        placeholder="client Email"
+      />
+      <!-- <div
+      *ngIf="
+        clientForm.get('email')?.invalid && clientForm.get('email')?.touched
+      "
+    >
+      <span *ngIf="clientForm.get('email')?.errors">Email is required</span>
+      <span *ngIf="clientForm.get('email')?.errors">Invalid email format</span>
+    </div> -->
+    </div>
+    <button type="submit" [disabled]="clientForm.invalid" class="mb-3">
+      Add new Client
+    </button>
+  </form>
+</div>

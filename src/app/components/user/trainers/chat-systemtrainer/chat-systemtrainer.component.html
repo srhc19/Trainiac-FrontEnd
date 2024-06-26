@@ -1,0 +1,274 @@
+<!-- component -->
+<!-- This is an example component -->
+
+<div class="maincontainer">
+  <div class="flex min-h-16 items-center justify-between text-white">
+    <div class="title ml-3">Trainiac</div>
+    <div class="flex items-center space-x-4 mr-3">
+      <img
+        src="{{ trainerData.profileimage }}"
+        alt="{{ trainerData.name }}"
+        class="w-8 h-8 rounded-full object-cover border border-gray-300"
+      />
+      <span
+        (click)="profile()"
+        class="text-gray-700 font-semibold cursor-pointer hover:text-gray-900"
+      >
+        {{ trainerData.name }}
+      </span>
+      <div
+        class="hamburger-menu cursor-pointer space-y-1.5"
+        (click)="toggleDropdown()"
+      >
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+      </div>
+    </div>
+  </div>
+  <div class="secondcontainer">
+    <div class="pagelinks bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl">
+      <div class="links space-y-4">
+        <h5 class="link">
+          <a (click)="clientList()" class="text-gray-400 hover:">Clients</a>
+        </h5>
+        <h5 class="link">
+          <a (click)="calender()" class="text-gray-400 hover:text-gray-900"
+            >Calender</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="blogs()" class="text-gray-400 hover:text-gray-900"
+            >Blogs</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="chatsystem()" class="text-gray-400 hover:text-gray-900"
+            >Messages</a
+          >
+        </h5>
+        <h5 class="link">
+          <a
+            (click)="videoCallSelectClient()"
+            class="text-gray-400 hover:text-gray-900"
+            >Video Session</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="clientRequest()" class="text-gray-400 hover:text-gray-900"
+            >clientRequest</a
+          >
+        </h5>
+        <button
+          class="btn-style link-btn bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+    <div
+      class="content flex flex-col p-8 bg-white rounded-lg mr-2 mb-5 min-h-[80vh] min-w-[80vw] shadow-md hover:shadow-xl"
+    >
+      <div class="clientlist-containerflex-1 overflow-hidden">
+        <div
+          class="container mx-auto shadow-lg rounded-lg bg-white h-full flex flex-col"
+        >
+          <div class="flex flex-col md:flex-row h-full">
+            <!-- User List -->
+            <div
+              class="userlist flex flex-col w-full md:w-2/5 border-r-2 overflow-y-auto"
+              *ngIf="showChatList || !isMobile"
+            >
+              <app-chatdisplay
+                class="container_list"
+                (profileChange)="displayProfile($event)"
+              ></app-chatdisplay>
+            </div>
+            <!-- Message Section -->
+            <div
+              class="flex flex-col w-full md:w-3/5 p-4"
+              *ngIf="showMessages || !isMobile"
+            >
+              <button
+                (click)="showMessages = false; showChatList = true"
+                class="back-btn btn-style link-btn w-30 mb-2 lg:mb-4 py-2 px-4 bg-gray-200 rounded-lg"
+                *ngIf="isMobile && showMessages"
+              >
+                Back
+              </button>
+              <div
+                class="overflow-hidden messageContainer w-full flex flex-col justify-between"
+              >
+                <div class="reciverBio border-l-2 px-3">
+                  <div
+                    class="flex flex-col userProfilDetails sticky top-0 z-10 p-1 mt-4 bg-slate-400 rounded-lg shadow-lg mr-12 w-full"
+                  >
+                    <div
+                      class="flex gap-4 flex-row align-middle justify-start items-center"
+                    >
+                      <img
+                        *ngIf="messages.length !== 0"
+                        [src]="trainerData.profileimage"
+                        class="object-cover rounded-full h-8 w-8"
+                        alt=""
+                      />
+                      <div class="font-semibold text-xl lg:py-4">
+                        {{ name }}
+                      </div>
+                    </div>
+                    <div class="font-medium px-10">{{ Bio }}</div>
+                  </div>
+                </div>
+                <div
+                  class="flex flex-col mt-3 space-y-4 overflow-y-auto chat_container"
+                  #chatContainer
+                >
+                  <p *ngIf="messages.length === 0" class="text-gray-400">
+                    No messages yet.
+                  </p>
+                  <div
+                    class="message flex flex-col space-y-2"
+                    *ngFor="let message of messages"
+                  >
+                    <div class="flex justify-end mb-4" *ngIf="message.isSender">
+                      <div class="flex flex-col">
+                        <div
+                          class="mr-2 py-2 px-2 bg-blue-500 rounded-bl-2xl rounded-tl-2xl rounded-tr-md text-white max-w-xs md:max-w-md font-semibold shadow-lg transition-transform transform hover:scale-105"
+                        >
+                          {{ message.content }}
+                        </div>
+                        <div class="mt-2 text-right">
+                          <small *ngIf="message.read" class="text-gray-500"
+                            >Seen</small
+                          >
+                          <small *ngIf="!message.read" class="text-gray-500"
+                            >Not seen</small
+                          >
+                        </div>
+                      </div>
+                      <img
+                        [src]="trainerData.profileimage"
+                        class="object-cover h-10 w-10 rounded-full border-2 border-blue-500 shadow-sm"
+                        alt="Sender profile image"
+                      />
+                    </div>
+                    <div
+                      class="flex justify-start mb-4"
+                      *ngIf="!message.isSender"
+                    >
+                      <img
+                        [src]="reciverimage"
+                        class="object-cover h-10 w-10 rounded-full border-2 border-gray-400 shadow-sm"
+                        alt="Receiver profile image"
+                      />
+                      <div
+                        class="ml-2 py-2 px-2 bg-gray-400 rounded-br-2xl rounded-tr-2xl rounded-tl-md text-white max-w-xs md:max-w-md font-semibold shadow-lg transition-transform transform hover:scale-105"
+                      >
+                        {{ message.content }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <form
+                [formGroup]="messageForm"
+                (ngSubmit)="createMessage()"
+                class="p-1 lg:p-3 lg:mt-4 bg-slate-400 rounded-lg shadow-lg"
+              >
+                <div class="input-container flex items-center lg">
+                  <input
+                    class="w-full bg-gray-200 py-2 px-4 rounded-xl"
+                    type="text"
+                    placeholder="Type your message here..."
+                    formControlName="message"
+                  />
+                  <button
+                    type="button"
+                    (click)="toggleEmojiPicker()"
+                    class="flex flex-row items-center lg:btn-style lg:py-1 lg:px-2 rounded-xl ml-2 bg-yellow-500 text-white hover:bg-yellow-600"
+                  >
+                    😊
+                  </button>
+                  <button
+                    (click)="createMessage()"
+                    class="flex flex-row items-center btn-style lg:py-2 lg:px-4 rounded-xl ml-2 bg-blue-500 text-white hover:bg-blue-600"
+                  >
+                    Send
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-3 h-3 lg:w-6 lg:h-6 ml-1"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <emoji-mart
+                  *ngIf="showEmojiPicker"
+                  title="Pick your emoji…"
+                  emoji="point_up"
+                  (emojiClick)="addEmoji($event)"
+                  class="custom-emoji-picker"
+                  [style]="{
+                  position: 'absolute',
+               
+                  
+                  bottom: '60px',
+                  right: '20px',
+                  backgroundColor: 'white',
+                  zIndex: 1000,
+                  padding:'10px',
+                }"
+                ></emoji-mart>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown-menu" id="dropdown-menu">
+        <a href="" class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Clients</a
+        >
+        <a
+          (click)="calender()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900 cursor-pointer"
+          >Calendar</a
+        >
+        <a
+          (click)="blogs()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900 cursor-pointer"
+          >Blogs</a
+        >
+        <a
+          (click)="chatsystem()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900 cursor-pointer"
+          >Messages</a
+        >
+        <a
+          (click)="videoCallSelectClient()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900 cursor-pointer"
+          >Video Session</a
+        >
+        <a
+          (click)="clientRequest()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900 cursor-pointer"
+          >Client Request</a
+        >
+        <button
+          class="w-full text-left px-4 py-2 bg-red-600 hover:bg-red-700 text-white"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

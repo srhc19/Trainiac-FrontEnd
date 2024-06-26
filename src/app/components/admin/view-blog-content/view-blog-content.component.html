@@ -1,0 +1,128 @@
+<div class="min-h-screen flex flex-col lg:flex-row">
+  <!-- Navigation Bar -->
+  <!-- <div class="flex justify-between items-center bg-gray-800 text-white p-4">
+   
+    <div class="flex items-center">
+      <span class="profilename text-lg">S.c</span>
+    </div>
+  </div> -->
+  <!-- Sidebar -->
+  <div class="w-full lg:w-1/5 bg-gray-800 text-white p-4">
+    <div class="title mb-6">Trainiac</div>
+    <!-- Mobile menu toggle button -->
+    <div class="lg:hidden mb-4">
+      <button
+        class="w-full py-2 bg-gray-700 hover:bg-gray-600 text-white font-bold rounded"
+        (click)="toggleNav()"
+      >
+        Menu
+      </button>
+    </div>
+    <!-- Sidebar navigation -->
+    <div
+      [ngClass]="{ hidden: isNavHidden, block: !isNavHidden }"
+      class="space-y-4 lg:block"
+    >
+      <p class="cursor-pointer hover:text-gray-300" (click)="adminClient()">
+        Clients
+      </p>
+      <p class="cursor-pointer hover:text-gray-300" (click)="trainerslist()">
+        Trainer
+      </p>
+      <p class="cursor-pointer hover:text-gray-300" (click)="adminBlog()">
+        Blogs
+      </p>
+      <p
+        class="cursor-pointer hover:text-gray-300"
+        (click)="sessionManagement()"
+      >
+        Session Management
+      </p>
+      <p
+        class="cursor-pointer hover:text-gray-300"
+        (click)="adminPaymentData()"
+      >
+        Payment Details
+      </p>
+      <p class="cursor-pointer hover:text-gray-300" (click)="Dashboard()">
+        Dashboard
+      </p>
+      <button
+        class="w-full py-2 mt-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded"
+        (click)="logout()"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+  <div class="flex flex-1">
+    <!-- Main Content -->
+    <div class="w-4/5 p-6 bg-gray-100 rounded-lg shadow-lg">
+      <div class="mb-4"></div>
+
+      <!-- Image Section -->
+      <div class="relative mb-6">
+        <img
+          src="../../../../assets/pexels-cottonbro-studio-4761785.jpg"
+          alt="Blog Image"
+          class="w-full h-64 object-cover rounded-lg"
+        />
+        <div class="mt-4">
+          <div class="text-3xl font-bold fontClass">
+            {{ blogContent.title }}
+          </div>
+          <div class="text-gray-600 mt-2 fontClass">
+            {{ blogContent.author }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog Content -->
+      <div class="content mt-4 space-y-4">
+        <div *ngFor="let para of blogContent.content.paragraphs">
+          <p class="text-sm text-gray-800 fontClass">{{ para }}</p>
+        </div>
+        <div class="flex justify-between mt-4">
+          <div class="fontClass">
+            <strong>Status:</strong> {{ blogContent.status }}
+          </div>
+          <button
+            *ngIf="blogContent.status !== 'Approved'"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            (click)="blogContent._id ? publish(blogContent._id) : null"
+          >
+            Publish
+          </button>
+        </div>
+
+        <!-- Cancel Form -->
+        <form [formGroup]="cancelForm" class="mt-4">
+          <div
+            class="flex flex-col md:flex-row items-start space-y-2 md:space-y-0 md:space-x-4"
+          >
+            <div class="w-full md:w-3/4">
+              <textarea
+                formControlName="textarea"
+                cols="30"
+                rows="3"
+                class="border border-gray-300 rounded-lg p-2 w-full resize-none"
+              ></textarea>
+              <div *ngIf="isFieldInvalid('textarea')" class="text-red-500 mt-1">
+                Note is required.
+              </div>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4 md:mt-0"
+                (click)="blogContent._id ? onCancel(blogContent._id) : null"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

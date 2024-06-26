@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Trainiac</a>
+    <!-- <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+    <div class="flex justify-between">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+      <button class="btn nav-btn" (click)="register()">Get Started</button>
+      <!-- <button class="btn nav-btn logout-btn" (click)="logout()">logout</button> -->
+    </div>
+  </div>
+</nav>
+<div class="main-container">
+  <div class="main-heading-container">
+    <h1>Move With Joy.Live <br />Empowered</h1>
+    <p>
+      Take your coaching online and deliver <br />
+      an experience like nothing your clients <br />have ever seen before
+    </p>
+    <button class="btn getstarted-btn" (click)="register()">Get Started</button>
+  </div>
+</div>
+<app-mainpagedetails></app-mainpagedetails>
+<app-footer></app-footer>

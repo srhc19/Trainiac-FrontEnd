@@ -1,0 +1,84 @@
+<div class="min-h-screen flex flex-col lg:flex-row">
+  <div class="w-full lg:w-1/5 bg-gray-800 text-white p-4">
+    <div class="title mb-6">Trainiac</div>
+    <div class="lg:hidden mb-4">
+      <button
+        class="w-full py-2 bg-gray-700 hover:bg-gray-600 text-white font-bold rounded"
+        (click)="toggleNav()"
+      >
+        Menu
+      </button>
+    </div>
+    <div
+      [ngClass]="{ hidden: isNavHidden, block: !isNavHidden }"
+      class="space-y-4 nav lg:block"
+    >
+      <p class="cursor-pointer hover:text-gray-300" (click)="adminClient()">
+        Clients
+      </p>
+      <p class="cursor-pointer hover:text-gray-300" (click)="trainerslist()">
+        Trainer
+      </p>
+      <p class="cursor-pointer hover:text-gray-300" (click)="adminBlog()">
+        Blogs
+      </p>
+      <p
+        class="cursor-pointer hover:text-gray-300"
+        (click)="sessionManagement()"
+      >
+        Session Management
+      </p>
+      <p
+        class="cursor-pointer hover:text-gray-300"
+        (click)="adminPaymentData()"
+      >
+        Payment Details
+      </p>
+      <p class="cursor-pointer hover:text-gray-300" (click)="Dashboard()">
+        Dashboard
+      </p>
+      <button
+        class="w-full py-2 mt-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded"
+        (click)="logout()"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <div class="w-full lg:w-4/5 lg:p-8 bg-gray-100 font_Style">
+    <div class="mb-8"></div>
+
+    <div class="mb-8 flex justify-center">
+      <div class="flex w-full max-w-md">
+        <input
+          type="search"
+          class="flex-1 rounded-l-md p-2 border border-gray-300 focus:outline-none"
+          placeholder="Search"
+          aria-label="Search"
+          aria-describedby="search-addon"
+          [(ngModel)]="searchQuery"
+        />
+        <button
+          type="button"
+          class="bg-blue-500 text-white px-4 rounded-r-md"
+          (click)="performSearch()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+
+    <div class="bg-white lg:p-6 shadow-md rounded-lg">
+      <app-reusabletable
+        [columns]="['Name', 'Email', 'Role']"
+        [data]="userdata"
+        [currentPage]="currentPage"
+        [itemsPerPage]="itemsPerPage"
+        [totalItems]="totalItems"
+        (pageChange)="onPageChange($event)"
+        (CheckboxChange)="handleCheckboxChange($event)"
+      ></app-reusabletable>
+    </div>
+  </div>
+</div>

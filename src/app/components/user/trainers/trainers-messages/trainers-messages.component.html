@@ -1,0 +1,51 @@
+<div class="flex flex-col gap-3 w-full px-5 ">
+  <div class="border-l-4 border-red-500 px-5">
+    <div class="sticky top-0 z-10 bg-white flex flex-col userProfilDetails">
+      <div class="flex gap-4 items-center py-4">
+        <img
+          *ngIf="messages.length !== 0"
+          src="https://source.unsplash.com/L2cxSuKWbpo/600x600"
+          class="object-cover rounded-full h-8 w-8"
+          alt="User Image"
+        />
+        <div class="font-semibold text-xl">
+          {{ name }}
+        </div>
+      </div>
+      <div class="font-light">
+        {{ Bio }}
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col mt-5">
+    <p *ngIf="messages.length === 0" class="text-center text-gray-500">
+      No messages yet.
+    </p>
+    <div *ngFor="let message of messages" class="message">
+      <div class="flex justify-end mb-4" *ngIf="message.isSender">
+        <div
+          class="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"
+        >
+          {{ message.content }}
+        </div>
+        <img
+          src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+          class="object-cover h-8 w-8 rounded-full"
+          alt="Sender Image"
+        />
+      </div>
+      <div class="flex justify-start mb-4" *ngIf="!message.isSender">
+        <img
+          src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+          class="object-cover h-8 w-8 rounded-full"
+          alt="Receiver Image"
+        />
+        <div
+          class="ml-2 py-3 px-4 bg-gray-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white"
+        >
+          {{ message.content }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="pagelinks bg-gray-800 p-6 rounded-lg">
+  <div class="links space-y-4">
+    <h5 class="link">
+      <a (click)="clientList()" class="text-gray-400 hover:text-gray-900"
+        >Clients</a
+      >
+    </h5>
+    <h5 class="link">
+      <a (click)="calender()" class="text-gray-400 hover:text-gray-900"
+        >Calender</a
+      >
+    </h5>
+    <h5 class="link">
+      <a (click)="blogs()" class="text-gray-400 hover:text-gray-900">Blogs</a>
+    </h5>
+    <h5 class="link">
+      <a (click)="chatsystem()" class="text-gray-400 hover:text-gray-900"
+        >Messages</a
+      >
+    </h5>
+    <h5 class="link">
+      <a
+        (click)="videoCallSelectClient()"
+        class="text-gray-400 hover:text-gray-900"
+        >Video Session</a
+      >
+    </h5>
+    <h5 class="link">
+      <a (click)="clientRequest()" class="text-gray-400 hover:text-gray-900"
+        >clientRequest</a
+      >
+    </h5>
+    <button
+      class="btn-style link-btn bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+  </div>
+</div>

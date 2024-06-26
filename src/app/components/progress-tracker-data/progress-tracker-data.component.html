@@ -1,0 +1,243 @@
+<div class="maincontainer">
+  <div class="flex min-h-16 items-center justify-between text-white">
+    <div class="title ml-3">Trainiac</div>
+    <div class="flex items-center space-x-4">
+      <button class="btn-style link-btn" (click)="addNewData()">
+        Add new Data
+      </button>
+      <!-- <img
+        src="{{ clientData.profileimage }}"
+        alt="{{ clientData.name }}"
+        class="w-8 h-8 rounded-full object-cover border border-gray-300"
+      />
+      <span
+        (click)="profile()"
+        class="text-gray-700 font-semibold cursor-pointer hover:text-gray-900"
+      >
+        {{ clientData.name }}
+      </span> -->
+      <div
+        class="hamburger-menu cursor-pointer space-y-1.5"
+        (click)="toggleDropdown()"
+      >
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+      </div>
+    </div>
+  </div>
+  <div class="secondcontainer">
+    <div class="pagelinks bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl">
+      <div class="links space-y-4">
+        <h5 class="link">
+          <a (click)="trainerslist()" class="text-gray-400 hover:text-gray-900"
+            >Trainers</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="calender()" class="text-gray-400 hover:text-gray-900"
+            >Calender</a
+          >
+        </h5>
+        <h5 class="link">
+          <a
+            (click)="clientBlogList()"
+            class="text-gray-400 hover:text-gray-900"
+            >Blogs</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="workoutlist()" class="text-gray-400 hover:text-gray-900"
+            >Workout Lists</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="chatsystem()" class="text-gray-400 hover:text-gray-900"
+            >Messages</a
+          >
+        </h5>
+        <h5 class="link">
+          <a class="text-gray-400 hover:text-gray-900">Progress Tracker</a>
+        </h5>
+        <button
+          class="btn-style link-btn bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded"
+        (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+    <div class="content shadow-md hover:shadow-xl">
+      <table class="min-w-full leading-normal">
+        <thead>
+          <tr>
+            <th
+              class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+            >
+              Date
+            </th>
+            <th
+              class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+            >
+              Images
+            </th>
+            <th
+              class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+            >
+              Weight (kg)
+            </th>
+            <!-- <th
+              class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+            >
+              Weight Change (kg)
+            </th> -->
+            <th
+              class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+            >
+              Measurements (cm)
+            </th>
+            <th
+              class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+            >
+              Body Fat %
+            </th>
+            <th
+              class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+            >
+              Detailed View
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let progress of progressData; let i = index"
+            class="table-row"
+          >
+            <td class="table-cell" data-label="Date">
+              {{ progress.createdAt | date : "yyyy-MM-dd" }}
+            </td>
+            <td class="table-cell" data-label="Images">
+              <div class="flex flex-col g-6">
+                <img class="image" [src]="progress.frontPhoto" alt="Front" />
+                <img class="image" [src]="progress.sidePhoto" alt="Side" />
+                <img class="image" [src]="progress.backPhoto" alt="Back" />
+              </div>
+            </td>
+            <td class="table-cell" data-label="Weight (kg)">
+              {{ progress.currentWeight }} kg
+              <br />
+              Weight Change :
+              <span
+                class="weight-change"
+                [ngClass]="{
+                  'text-green-500': getWeightChange(i) < 0,
+                  'text-red-500': getWeightChange(i) > 0
+                }"
+              >
+                {{ getWeightChange(i) }} kg
+              </span>
+            </td>
+            <td class="table-cell" data-label="Measurements (cm)">
+              <div class="measurement">Waist: {{ progress.waist }}</div>
+              <div class="measurement">Hips: {{ progress.hips }}</div>
+              <div class="measurement">Chest: {{ progress.chest }}</div>
+              <div class="measurement">Arms: {{ progress.arms }}</div>
+              <div class="measurement">Legs: {{ progress.legs }}</div>
+              <div class="measurement">Calves: {{ progress.calves }}</div>
+              <div class="measurement">Forearms: {{ progress.forearms }}</div>
+            </td>
+            <td class="table-cell" data-label="Body Fat %">
+              {{ progress.bodyFatPercentage }}%
+              <br />
+              <span
+                class="body-fat-change"
+                [ngClass]="{
+                  'text-green-500': getBodyFatChange(i) < 0,
+                  'text-red-500': getBodyFatChange(i) > 0
+                }"
+              >
+                Change : {{ getBodyFatChange(i) }} %
+              </span>
+            </td>
+            <td class="table-cell" data-label="Detailed View">
+              <button
+                class="btn-style link-btn"
+                (click)="DetailedView(progress._id)"
+              >
+                Detailed View
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <nav aria-label="Page navigation example fixed bottom-0 left-0">
+        <ul class="pagination">
+          <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">
+            <a
+              class="page-link"
+              aria-label="Previous"
+              (click)="onPageChange(currentPage - 1)"
+            >
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li
+            class="page-item"
+            *ngFor="let page of getPageNumbers()"
+            [ngClass]="{ active: page === currentPage }"
+          >
+            <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+          </li>
+          <li
+            class="page-item"
+            [ngClass]="{ disabled: currentPage === getTotalPages() }"
+          >
+            <a
+              class="page-link"
+              aria-label="Next"
+              (click)="onPageChange(currentPage + 1)"
+            >
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu">
+      <a href="" class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+        >Trainers</a
+      >
+      <a
+        (click)="calender()"
+        class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+        >Calendar</a
+      >
+      <a
+        (click)="clientBlogList()"
+        class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+        >Blogs</a
+      >
+      <a
+        (click)="workoutlist()"
+        class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+        >Workout Lists</a
+      >
+      <a
+        (click)="chatsystem()"
+        class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+        >Messages</a
+      >
+      <a
+        (click)="ProgressTracker()"
+        class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+        >Progress Tracker</a
+      >
+      <button
+        class="w-full text-left px-4 py-2 bg-red-600 hover:bg-red-700 text-white"
+      (click)="logout()">
+        Logout
+      </button>
+    </div>
+  </div>
+</div>

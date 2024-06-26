@@ -1,0 +1,439 @@
+.calendar-container {
+  max-width: 1200px;
+  /* margin: 0 auto; */
+  overflow: hidden;
+}
+
+/* .calendar {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+} */
+.maincontainer {
+  position: relative;
+}
+
+.calendar-header {
+  border-radius: 20px;
+  color: #555;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.navigation-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.current-month,
+.current-year {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.calendar-grid {
+  max-width: 1200px;
+  color: #555;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Set 4 columns with equal width */
+  gap: 20px; /* Add gap between grid items */
+  transition: all 0.3s ease-in-out;
+  max-width: calc(100% - 20px); /* Adjust the max-width of the grid */
+  min-width: 300px;
+
+  padding: 10px; /* Add padding to the grid */
+}
+.calendar-day {
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.day-header {
+  padding: 10px;
+  background-color: #f3f4f6;
+  font-weight: bold;
+  color: #555;
+}
+
+.task-list {
+  padding: 10px;
+  color: #555;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+  color: #555;
+}
+
+.remove-task {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.add-task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.add-task-btn {
+  margin-left: 5px;
+  background-color: #4dabf7;
+  color: #555;
+  border: none;
+  padding: 3px 6px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.add-task-btn:hover {
+  background-color: #2a8ad8;
+}
+
+input[type="text"] {
+  padding: 4px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+/* nn
+.nav {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding-right: 10px;
+} */
+.secondcontainer {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 20px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 50px; */
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+.pagelinks {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background-color: white;
+  border-radius: 10px;
+  height: 88vh;
+}
+.links {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.searchbar {
+  padding-bottom: 30px;
+  /*  */
+}
+.input-group {
+  max-width: 300px;
+}
+.title {
+  font-family: "Racing Sans One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 25px;
+  color: black;
+}
+p {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@media (max-width: 700px) {
+  .pagelinks {
+    display: none;
+  }
+  .content {
+    margin-top: 20px;
+    padding: 5px;
+  }
+}
+
+.trainerlist-container {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+}
+
+.link {
+  position: relative;
+  font-family: "Lora", serif;
+  font-weight: bold;
+  padding: 10px;
+  color: #555;
+}
+
+.link:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #555;
+  transition: width 0.3s ease;
+}
+
+.link:hover:before {
+  width: 100%;
+}
+.link-btn {
+  margin: 10px;
+  padding: 3px 6px;
+  font-family: "Lora", serif;
+  font-weight: bold;
+}
+
+.link-btn {
+  color: #dee2e6;
+  /* background-image: linear-gradient(to right, #ff9966 0%, #ff5e62 100%); */
+  background-size: 200% auto;
+  background-position: right center;
+  transition: all 0.5s ease-out;
+}
+
+.link-btn:hover {
+  background-position: left center;
+  color: #ffffff;
+  text-decoration: none;
+}
+/* .card-details {
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #ffffff;
+  font-family: "Lora", serif;
+  font-weight: bold;
+  font-size: 14px;
+} */
+
+/* cardiomodel */
+.maincontainer {
+  position: relative;
+}
+
+.modal_btn {
+  font-size: 15px;
+  padding: 4px 8px;
+}
+#cardioModal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  z-index: 9999;
+}
+#gymModal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  z-index: 9999;
+}
+#yogaModal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  z-index: 9999;
+}
+.glass-container {
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  backdrop-filter: blur(10px); /* Apply the blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Optional: Border for better contrast */
+}
+
+/* * Responsive grid layout */
+/* @media (min-width: 600px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+} */
+.restbox {
+  min-width: 300px;
+  min-height: 80px;
+}
+
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger-menu span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px;
+  background-color: #333;
+}
+
+.pagelinks {
+  display: flex;
+}
+@media (max-width: 900px) {
+  .add-task {
+    display: flex;
+    flex-direction: column;
+  }
+  .dropDownClientList {
+    font-size: 15px;
+  }
+  .calendar-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  td {
+    font-size: 13px;
+  }
+  .viewbtn {
+    font-size: 12px;
+    padding: 5px;
+  }
+  .pagelinks {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+
+  .dropdown-menu {
+    display: none;
+    font-family: "Lora", serif;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    margin-right: 20px;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    width: 200px;
+    border-radius: 8px;
+  }
+
+  .dropdown-menu a,
+  .dropdown-menu button {
+    color: #333;
+    font-family: "Lora", serif;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-menu a:hover,
+  .dropdown-menu button:hover {
+    background-color: #575757;
+  }
+  .content {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    margin-left: 35px;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1200px) {
+  .calendar-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pagelinks {
+    display: none;
+  }
+  .hamburger-menu {
+    display: block;
+  }
+
+  .dropdown-menu {
+    display: none;
+    font-family: "Lora", serif;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    margin-right: 20px;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    width: 200px;
+    border-radius: 8px;
+  }
+
+  .dropdown-menu a,
+  .dropdown-menu button {
+    color: #333;
+    font-family: "Lora", serif;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-menu a:hover,
+  .dropdown-menu button:hover {
+    background-color: #575757;
+  }
+  .content {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    margin-left: 45px;
+  }
+}

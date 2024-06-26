@@ -1,0 +1,198 @@
+<div class="maincontainer">
+  <div class="flex min-h-16 items-center justify-between text-white">
+    <div class="title ml-3">Trainiac</div>
+    <div class="flex items-center space-x-4">
+      <!-- <span (click)="profile()" style="color: #555">S.c</span> -->
+      <div
+        class="hamburger-menu cursor-pointer space-y-1.5"
+        (click)="toggleDropdown()"
+      >
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+      </div>
+    </div>
+  </div>
+  <div class="secondcontainer">
+    <div class="pagelinks bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl">
+      <div class="links space-y-4">
+        <h5 class="link">
+          <a (click)="trainerslist()" class="text-gray-400 hover:text-gray-900"
+            >Trainers</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="calender()" class="text-gray-400 hover:text-gray-900"
+            >Calender</a
+          >
+        </h5>
+        <h5 class="link">
+          <a
+            (click)="clientBlogList()"
+            class="text-gray-400 hover:text-gray-900"
+            >Blogs</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="workoutlist()" class="text-gray-400 hover:text-gray-900"
+            >Workout Lists</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="chatsystem()" class="text-gray-400 hover:text-gray-900"
+            >Messages</a
+          >
+        </h5>
+        <h5 class="link">
+          <a
+            (click)="ProgressTracker()"
+            class="text-gray-400 hover:text-gray-900"
+            >Progress Tracker</a
+          >
+        </h5>
+        <button
+          class="btn-style link-btn bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded"
+        (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+    <div class="content">
+      <h2 class="text-2xl font-bold mb-6 text-center">
+        Body Stats:{{ details.createdAt | date : "yyyy-MM-dd" }}
+      </h2>
+      <div
+        class="data max-w-4xl mx-auto p-6 bg-white shadow-md rounded-md gap-10"
+      >
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="flex flex-col items-center">
+            <img
+              [src]="details.frontPhoto"
+              alt="Front View"
+              class="w-48 h-48 object-cover rounded-md mb-2"
+            />
+            <span>Front View</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <img
+              [src]="details.sidePhoto"
+              alt="Side View"
+              class="w-48 h-48 object-cover rounded-md mb-2"
+            />
+            <span>Side View</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <img
+              [src]="details.backPhoto"
+              alt="Back View"
+              class="w-48 h-48 object-cover rounded-md mb-2"
+            />
+            <span>Back View</span>
+          </div>
+        </div>
+        <div class="mt-6">
+          <table class="min-w-full bg-white">
+            <tbody>
+              <tr>
+                <td class="py-2 px-4 border-b border-gray-200">
+                  Current Weight
+                </td>
+                <td class="py-2 px-4 border-b border-gray-200">
+                  {{ details.currentWeight }} kg
+                </td>
+              </tr>
+              <tr>
+                <td class="py-2 px-4 border-b border-gray-200">Waist</td>
+                <td class="py-2 px-4 border-b border-gray-200">
+                  {{ details.waist }} cm
+                </td>
+              </tr>
+              <tr>
+                <td class="py-2 px-4 border-b border-gray-200">Hips</td>
+                <td class="py-2 px-4 border-b border-gray-200">
+                  {{ details.hips }} cm
+                </td>
+              </tr>
+              <tr>
+                <td class="py-2 px-4 border-b border-gray-200">Chest</td>
+                <td class="py-2 px-4 border-b border-gray-200">
+                  {{ details.chest }} cm
+                </td>
+              </tr>
+              <tr>
+                <td class="py-2 px-4 border-b border-gray-200">Arms</td>
+                <td class="py-2 px-4 border-b border-gray-200">
+                  {{ details.arms }} cm
+                </td>
+              </tr>
+              <tr>
+                <td class="py-2 px-4 border-b border-gray-200">Legs</td>
+                <td class="py-2 px-4 border-b border-gray-200">
+                  {{ details.legs }} cm
+                </td>
+              </tr>
+              <tr>
+                <td class="py-2 px-4 border-b border-gray-200">Calves</td>
+                <td class="py-2 px-4 border-b border-gray-200">
+                  {{ details.calves }} cm
+                </td>
+              </tr>
+              <tr>
+                <td class="py-2 px-4 border-b border-gray-200">Forearms</td>
+                <td class="py-2 px-4 border-b border-gray-200">
+                  {{ details.forearms }} cm
+                </td>
+              </tr>
+              <tr>
+                <td class="py-2 px-4 border-b border-gray-200">
+                  Body Fat Percentage
+                </td>
+                <td class="py-2 px-4 border-b border-gray-200">
+                  {{ details.bodyFatPercentage }}%
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn-style link-btn" (click)="editProgress()">
+            Edit Data
+          </button>
+        </div>
+      </div>
+      <div class="dropdown-menu" id="dropdown-menu">
+        <a href="" class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Trainers</a
+        >
+        <a
+          (click)="calender()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Calendar</a
+        >
+        <a
+          (click)="clientBlogList()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Blogs</a
+        >
+        <a
+          (click)="workoutlist()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Workout Lists</a
+        >
+        <a
+          (click)="chatsystem()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Messages</a
+        >
+        <a
+          (click)="ProgressTracker()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Progress Tracker</a
+        >
+        <button
+          class="w-full text-left px-4 py-2 bg-red-600 hover:bg-red-700 text-white"
+       (click)="logout()" >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

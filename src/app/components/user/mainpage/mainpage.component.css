@@ -1,0 +1,86 @@
+.navbar {
+  background-color: #d9d9d9;
+  /* background-color: #f59f00; */
+}
+.nav-btn {
+  border: 0.1px solid;
+  border-radius: 5px;
+  color: #333333;
+  max-width: 150px;
+}
+.logout-btn {
+  margin-left: 10px;
+}
+.navbar-brand {
+  font-family: "Racing Sans One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 25px;
+}
+.nav-link {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.getstarted-btn {
+  animation: fade-out linear;
+  animation-timeline: view();
+  animation-range: exit -200px;
+  background-color: #d9d9d9;
+  color: #333333;
+  max-width: 150px;
+}
+.main-container {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  background-image: url("../../../../assets/pexels-tms-sam-694587.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: start;
+
+  animation: image-animation linear forward;
+  animation-timeline: view();
+  animation-range: exit;
+}
+@keyframes image-animation {
+  25% {
+    opacity: 1;
+  }
+  85%,
+  100% {
+    opacity: 0;
+    scale: 3;
+  }
+}
+.main-heading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-self: center;
+  margin-left: 100px;
+}
+h1 {
+  font-family: "Lora", serif;
+  font-size: 60px;
+  color: #333333;
+  animation: fade-out linear;
+  animation-timeline: view();
+  animation-range: exit -200px;
+  line-height: 1;
+}
+p {
+  line-height: 1.6;
+  color: #333333;
+  animation: fade-out linear;
+  animation-timeline: view();
+  animation-range: exit -200px;
+}
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,112 @@
+<div class="main-container">
+  <div class="row second-container">
+    <span class="main-title">Trainiac</span>
+    <div class="col-md-6">
+      <div class="content text-center">
+        <!-- <span [class.message]="applyClass">{{ message }}</span> -->
+        <h1>LOGIN AS CLIENT</h1>
+
+        <form (ngSubmit)="onSubmit()" class="form-element">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="form-control"
+            [(ngModel)]="formData.email"
+            placeholder="Enter Email"
+            email
+            required
+            #email="ngModel"
+          />
+          <div
+            *ngIf="email.invalid && (email.dirty || email.touched)"
+            class="errormessage"
+          >
+            <div *ngIf="email.errors?.['required']">Email is required.</div>
+            <div *ngIf="email.errors?.['email']">
+              Please enter a valid email address.
+            </div>
+          </div>
+
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="form-control"
+            [(ngModel)]="formData.password"
+            placeholder="Enter Password"
+            minlength="6"
+            required
+            #password="ngModel"
+          />
+          <div
+            *ngIf="password.invalid && (password.dirty || password.touched)"
+            class="errormessage"
+          >
+            <div *ngIf="password.errors?.['required']">
+              Password is required.
+            </div>
+            <div *ngIf="password.errors?.['minlength']">
+              Password must be at least 6 characters.
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <a class="link" (click)="Forgotpassword()">Forgot password?</a>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            data-mdb-button-init
+            data-mdb-ripple-init
+            [class.flex]="isLoading"
+            class="btn mb-4 py-1 px-4 getstarted-btn justify-center items-center w-full transition ease-in duration-200 text-center shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg max-w-md"
+          >
+            <svg
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="mr-2"
+              [class.animate-spin]="isLoading"
+              [class.hidden]="!isLoading"
+              viewBox="0 0 1792 1792"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z"
+              ></path>
+            </svg>
+            Login
+          </button>
+
+          <div class="text-center">
+            <p>
+              Not a member?
+              <a class="link" (click)="registerlink()">Register</a>
+            </p>
+            <p>or sign up with:</p>
+            <span (click)="trainerLogin()" class="trainerLink"
+              >Login As Trainer</span
+            >
+            <!-- <button
+              type="button"
+              data-mdb-button-init
+              data-mdb-ripple-init
+              class="btn btn-link btn-floating mx-1"
+              (click)="signInWithGoogle()"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
+                !Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+            <!-- <path
+                  d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
+                />
+              </svg>
+            </button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

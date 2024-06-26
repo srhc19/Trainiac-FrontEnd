@@ -1,0 +1,54 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import "~bootstrap/dist/css/bootstrap.min.css"; */
+@import "@ctrl/ngx-emoji-mart/picker";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @import "../node_modules/angular-calendar/css/angular-calendar.css"; */
+/* @import "ngx-toastr/toastr"; */
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background-color: #f7f5f4;
+  /* background-color: #f9fafb; */
+}
+
+.btn-style {
+  padding: 2px 6px;
+  color: #fff;
+  border: none;
+  background-color: #0b7285;
+  border-radius: 4px;
+}
+.link-btn {
+  margin: 10px;
+  padding: 3px 6px;
+  font-family: "Lora", serif;
+  font-weight: bold;
+}
+
+.link-btn {
+  color: #555;
+  /* background-image: linear-gradient(to right, #ff9966 0%, #ff5e62 100%); */
+  background-size: 200% auto;
+  background-position: right center;
+  transition: all 0.5s ease-out;
+}
+
+.link-btn:hover {
+  background-position: left center;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

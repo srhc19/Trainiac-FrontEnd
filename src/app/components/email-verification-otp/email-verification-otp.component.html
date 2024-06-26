@@ -1,0 +1,82 @@
+<div class="main-container">
+  <div class="row second-container">
+    <span class="main-title">Trainiac</span>
+    <div class="col-md-6">
+      <div class="content text-center">
+        <!-- <span [class.message]="applyClass" class="errormessage">{{
+          message
+        }}</span> -->
+        <h1>OTP Verification</h1>
+
+        <p *ngIf="timer > 0" class="timer">
+          Time remaining: {{ timer }} seconds
+        </p>
+        <form [formGroup]="otpForm" class="form-element">
+          <input
+            type="text"
+            formControlName="otp"
+            class="form-control"
+            maxlength="4"
+            placeholder="Enter OTP"
+          />
+          <div
+            class="error-display"
+            *ngIf="
+              otpForm.get('otp')?.errors &&
+              (otpForm.get('otp')?.dirty || otpForm.get('otp')?.touched)
+            "
+          >
+            <small
+              class="errormessage"
+              *ngIf="otpForm.get('otp')?.hasError('required')"
+            >
+              This field is required.
+            </small>
+            <small
+              class="errormessage"
+              *ngIf="otpForm.get('otp')?.hasError('minlength')"
+            >
+              OTP must be 4 digits long.
+            </small>
+            <small
+              class="errormessage"
+              *ngIf="otpForm.get('otp')?.hasError('maxlength')"
+            >
+              OTP cannot be more than 4 digits.
+            </small>
+            <small
+              class="errormessage"
+              *ngIf="otpForm.get('otp')?.hasError('pattern')"
+            >
+              OTP must contain only numbers.
+            </small>
+          </div>
+
+          <button
+            (click)="onSubmit()"
+            [class.flex]="isLoading"
+            class="btn mb-4 py-1 px-4 getstarted-btn justify-center items-center w-full transition ease-in duration-200 text-center shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg max-w-md"
+            [disabled]="timer === 0 || otpForm.invalid"
+          >
+            <svg
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="mr-2"
+              [class.animate-spin]="isLoading"
+              [class.hidden]="!isLoading"
+              viewBox="0 0 1792 1792"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z"
+              ></path>
+            </svg>
+            Submit
+          </button>
+          <button (click)="resendOTP()" class="">Resend OTP</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

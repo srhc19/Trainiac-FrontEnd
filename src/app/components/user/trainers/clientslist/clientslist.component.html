@@ -1,0 +1,232 @@
+<div class="maincontainer min-h-screen p-2">
+  <div class="flex min-h-16 items-center justify-between">
+    <!-- bg-gray-100 -->
+    <div class="title text-2xl ml-1">Trainiac</div>
+    <div class="flex items-center space-x-4">
+      <img
+        src="{{ trainerData.profileimage }}"
+        alt="{{ trainerData.name }}"
+        class="w-8 h-8 rounded-full object-cover border border-gray-300"
+      />
+      <span
+        (click)="profile()"
+        class="text-gray-700 font-semibold cursor-pointer hover:text-gray-900"
+      >
+        {{ trainerData.name }}
+      </span>
+      <div
+        class="hamburger-menu cursor-pointer space-y-1.5"
+        (click)="toggleDropdown()"
+      >
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+        <span class="block w-6 h-0.5 bg-gray-700"></span>
+      </div>
+    </div>
+  </div>
+  <div class="secondcontainer flex space-x-8">
+    <div class="pagelinks shadow-md hover:shadow-xl bg-gray-800 p-6 rounded-lg">
+      <div class="links space-y-4">
+        <h5 class="link">
+          <a (click)="clientList()" class="text-gray-400 hover:text-gray-900"
+            >Clients</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="calender()" class="text-gray-400 hover:text-gray-900"
+            >Calender</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="blogs()" class="text-gray-400 hover:text-gray-900"
+            >Blogs</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="chatsystem()" class="text-gray-400 hover:text-gray-900"
+            >Messages</a
+          >
+        </h5>
+        <h5 class="link">
+          <a
+            (click)="videoCallSelectClient()"
+            class="text-gray-400 hover:text-gray-900"
+            >Video Session</a
+          >
+        </h5>
+        <h5 class="link">
+          <a (click)="clientRequest()" class="text-gray-400 hover:text-gray-900"
+            >clientRequest</a
+          >
+        </h5>
+        <button
+          class="btn-style link-btn bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+    <div
+      class="content shadow-md hover:shadow-xl flex-1 justify-between bg-gray-800 p-6 rounded-lg relative"
+    >
+      <div>
+        <div class="flex flex-col items-start mb-6">
+          <p
+            *ngIf="clientlist.length === 0"
+            class="flex ml-10 hover:underline"
+            (click)="editprofile()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6 text-red-500"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+              />
+            </svg>
+            Update your profile to get more clients
+          </p>
+          <div class="searchbar flex-1">
+            <div class="input-group flex">
+              <input
+                type="search"
+                class="form-control rounded-l-md p-2 text-black"
+                placeholder="Search"
+                aria-label="Search"
+                aria-describedby="search-addon"
+                [(ngModel)]="searchQuery"
+              />
+              <button
+                type="button"
+                class="btn btn-outline-primary bg-blue-600 text-white px-4 rounded-r-md"
+                (click)="performSearch()"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="clientlist-container overflow-auto">
+          <table class="table-auto w-full text-left">
+            <thead>
+              <tr class="border-b border-gray-700">
+                <th scope="col" class="p-2 text-gray-400">S.No</th>
+                <th scope="col" class="p-2 text-gray-400">Name</th>
+                <th scope="col" class="p-2 text-gray-400">Goals</th>
+                <th scope="col" class="p-2 text-gray-400">Status</th>
+                <th scope="col" class="p-2 text-gray-400">Profile</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let items of clientlist; let i = index"
+                class="border-b border-gray-700"
+              >
+                <th scope="row" class="p-2 text-gray-400">
+                  {{ startIndex + i + 1 }}
+                </th>
+                <td class="p-2" (click)="clientProfile(items.user_id)">
+                  {{ items.name }}
+                </td>
+                <td class="p-2">
+                  {{
+                    items.goals.length > 0
+                      ? items.goals.join(", ")
+                      : "No goals added"
+                  }}
+                </td>
+
+                <td class="p-2">Active</td>
+                <td class="p-2" (click)="clientProfile(items.user_id)">
+                  <button
+                    class="btn viewbtn btn-style bg-blue-600 hover:bg-blue-700 text-white md:py-1 md:px-3 rounded"
+                  >
+                    View Profile
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <nav aria-label="Page navigation example fixed bottom-0 left-0">
+        <ul class="pagination">
+          <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">
+            <a
+              class="page-link"
+              aria-label="Previous"
+              (click)="onPageChange(currentPage - 1)"
+            >
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li
+            class="page-item"
+            *ngFor="let page of getPageNumbers()"
+            [ngClass]="{ active: page === currentPage }"
+          >
+            <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+          </li>
+          <li
+            class="page-item"
+            [ngClass]="{ disabled: currentPage === getTotalPages() }"
+          >
+            <a
+              class="page-link"
+              aria-label="Next"
+              (click)="onPageChange(currentPage + 1)"
+            >
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="dropdown-menu" id="dropdown-menu">
+        <a href="" class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Clients</a
+        >
+        <a
+          (click)="calender()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Calendar</a
+        >
+        <a
+          (click)="blogs()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Blogs</a
+        >
+        <a
+          (click)="chatsystem()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Messages</a
+        >
+        <a
+          (click)="videoCallSelectClient()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Video Session</a
+        >
+        <a
+          (click)="clientRequest()"
+          class="block px-4 py-2 text-gray-400 hover:text-gray-900"
+          >Client Request</a
+        >
+        <button
+          class="w-full text-left px-4 py-2 bg-red-600 hover:bg-red-700 text-white"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<div id="cardioModal">
+  <div class="cardiomodal-dialog">
+    <div class="cardiomodal-content">
+      <div class="cardiomodal-header flex justify-between align-middle">
+        <h5 class="cardiomodal-title" id="cardioModalLabel">
+          Add Cardio Workout
+        </h5>
+        <button
+          type="button"
+          class="close closesvg"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModalClick()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="cardioForm">
+          <div class="form-group">
+            <label for="selectClient">Select Client:</label>
+            <select
+              class="form-control"
+              id="selectClient"
+              formControlName="clientEmail"
+            >
+              <option value="">Select Client</option>
+              <option *ngFor="let client of clientlist" [value]="client.email">
+                {{ client.name }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="workoutDate">Date:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="workoutDate"
+              formControlName="workoutDate"
+            />
+          </div>
+          <div class="form-group">
+            <label for="cardioActivity">Activity:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="cardioActivity"
+              formControlName="activity"
+            />
+          </div>
+          <div class="form-group">
+            <label for="cardioIntensity">Intensity:</label>
+            <select
+              class="form-control"
+              id="cardioIntensity"
+              formControlName="intensity"
+            >
+              <option value="Low">Low</option>
+              <option value="Moderate">Moderate</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cardioDuration">Duration (minutes):</label>
+            <input
+              type="number"
+              class="form-control"
+              id="cardioDuration"
+              formControlName="duration"
+              min="0"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="cardiomodal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary link-btn"
+          (click)="closeModalClick()"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary link-btn"
+          (click)="addCardioWorkout()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
