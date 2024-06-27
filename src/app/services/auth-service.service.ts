@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { Observable, map, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,7 @@ import { Observable, map, tap } from 'rxjs';
 export class AuthServiceService {
   private accessToken: string | null = null;
   private refreshToken: string | null = null;
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = `${environment.apiUrl}`;
 
   constructor(private router: Router, private http: HttpClient) {}
   isAuthenticated(): boolean {

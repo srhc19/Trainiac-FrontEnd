@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import * as userActions from '../ngrx/userauth/user.action';
 import { Router } from '@angular/router';
 import { GetuserdataService } from './getuserdata.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -83,7 +84,7 @@ export class RazorpayService {
 
   private handlePaymentFailure(response: any) {
     this.http
-      .post('http://localhost:3000/user/razorpayFailure', {
+      .post(`${environment.apiUrl}/user/razorpayFailure`, {
         payment_id: response.razorpay_payment_id,
         order_id: response.razorpay_order_id,
       })

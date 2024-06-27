@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class ChatSocketService {
   socket: Socket;
 
   constructor() {
-    this.socket = io('http://localhost:3000');
+    this.socket = io(environment.apiUrl);
   }
 
   joinRoom(userId: string) {

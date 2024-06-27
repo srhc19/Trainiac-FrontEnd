@@ -1,4 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000',
+  apiUrl: 'https://vrna-ecom.store',
 };
+
+// http://localhost:3000

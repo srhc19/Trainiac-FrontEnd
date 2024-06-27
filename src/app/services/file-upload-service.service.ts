@@ -2,12 +2,13 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FileUploadServiceService {
-  private apiUrl = 'http://localhost:3000/user/client/editprogressImage';
+  private apiUrl = `${environment.apiUrl}/user/client/editprogressImage`;
   constructor(private http: HttpClient) {}
   uploadFile(file: File): Observable<string> {
     const formData = new FormData();
