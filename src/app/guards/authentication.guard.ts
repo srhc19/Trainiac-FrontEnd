@@ -7,7 +7,7 @@ export const authenticationGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthServiceService);
   // const AccessToken = localStorage.getItem('AccessToken');
-  debugger;
+  // debugger;
   if (authService.isAuthenticated()) {
     return true;
   } else if (authService.getRefreshToken()) {

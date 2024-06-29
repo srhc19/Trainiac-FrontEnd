@@ -24,7 +24,7 @@
   gap: 150px;
   justify-content: center;
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
   .secondary-container {
     margin-top: 40px;
     margin-bottom: 40px;
@@ -32,15 +32,20 @@
     grid-template-columns: 1fr;
 
     justify-content: center;
+    align-items: center;
   }
   .contentsecond {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-self: center;
   }
   .imagesecond {
     display: flex;
     justify-content: center;
+  }
+  .content1 {
+    margin-left: 100px;
   }
 }
 .imagesecond {

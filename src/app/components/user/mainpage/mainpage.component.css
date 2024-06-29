@@ -84,3 +84,9 @@ p {
     opacity: 0;
   }
 }
+@media screen and (max-width: 900px) {
+  .main-container,
+  .navbar {
+    min-width: 500px;
+  }
+}

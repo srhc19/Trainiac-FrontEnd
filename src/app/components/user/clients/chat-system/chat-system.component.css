@@ -246,6 +246,15 @@ p {
   }
 }
 @media (max-width: 500px) {
+  .secondcontainer {
+    min-width: 380px;
+  }
+  .clientlist-container {
+    min-width: 380px;
+  }
+  .content {
+    min-width: 500px;
+  }
   .pagelinks {
     display: none;
   }

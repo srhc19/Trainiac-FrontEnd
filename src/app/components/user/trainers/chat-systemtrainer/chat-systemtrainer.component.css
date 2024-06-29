@@ -202,6 +202,9 @@ p {
   .dropdown-menu button:hover {
     background-color: #575757;
   }
+  .container {
+    min-width: 75vw;
+  }
 }
 /* @media (min-width: 800px) and (max-width: 1000px) {
   .messageContainer {
@@ -246,6 +249,12 @@ p {
   }
 }
 @media (max-width: 500px) {
+  .clientlist-container {
+    min-width: 380px;
+  }
+  .content {
+    min-width: 500px;
+  }
   .pagelinks {
     display: none;
   }
