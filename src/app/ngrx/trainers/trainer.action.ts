@@ -558,3 +558,22 @@ export const addMessageListFailure = createAction(
   '[trainer] add Message List failure ',
   props<{ error: any }>()
 );
+export const getMessageSearchResult = createAction(
+  '[trainer] get Message Search Result',
+  props<{ text: string }>()
+);
+export const getMessageSearchResultSuccess = createAction(
+  '[trainer] get Message Search Result Success',
+  props<{
+    userdata: {
+      name: string;
+      email: string;
+      Bio: string;
+      profileimage: string;
+    };
+  }>()
+);
+export const getMessageSearchResultFailure = createAction(
+  '[trainer] get Message Search Result Failure',
+  props<{ error: any }>()
+);

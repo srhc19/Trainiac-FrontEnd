@@ -6,6 +6,7 @@ import {
   EventEmitter,
   HostListener,
   OnChanges,
+  OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
@@ -49,7 +50,7 @@ import { GetuserdataService } from '../../../../services/getuserdata.service';
   styleUrl: './chat-systemtrainer.component.css',
 })
 export class ChatSystemTrainerComponent
-  implements OnInit, AfterViewInit, AfterViewChecked
+  implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy
 {
   @ViewChild('chatContainer') private chatContainer!: ElementRef;
   // user!: UserProfile;
@@ -68,6 +69,7 @@ export class ChatSystemTrainerComponent
   showMessages = false;
   isMobile = false;
 
+  showinputField = false;
   constructor(
     private fb: FormBuilder,
     private chatService: ChatSocketService,
@@ -87,7 +89,17 @@ export class ChatSystemTrainerComponent
   }
 
   ngOnInit(): void {
+    this.requestNotificationPermission();
     let user_id = this.GetuserdataService.getUserid();
+
+    let locName = localStorage.getItem('receiversName');
+    let locEmail = localStorage.getItem('receiverEmail');
+    let locBio = localStorage.getItem('receiversBio');
+
+    if (locName && locEmail) {
+      let data = { name: locName, Bio: locBio ? locBio : '', email: locEmail };
+      this.displayProfile(data);
+    }
 
     this.store.dispatch(userActions.getCurrentTrainer({ user_id }));
 
@@ -183,6 +195,10 @@ export class ChatSystemTrainerComponent
   }
 
   displayProfile(receiverData: UserProfile) {
+    if (this.messageForm) {
+      this.messageForm.reset();
+    }
+    this.showinputField = true;
     // this.user = receiverData;
     // this.scrollToBottom();
     this.name = receiverData.name;
@@ -193,7 +209,9 @@ export class ChatSystemTrainerComponent
     let user_id = this.GetuserdataService.getUserid();
     let senderemail = this.GetuserdataService.getEmail();
     let receiverEmail = receiverData.email;
-
+    localStorage.setItem('receiverEmail', receiverData.email);
+    localStorage.setItem('receiversName', receiverData.name);
+    localStorage.setItem('receiversBio', receiverData.Bio);
     if (user_id && senderemail) {
       this.store.dispatch(
         trainerActions.getMessageListTrainer({
@@ -264,7 +282,25 @@ export class ChatSystemTrainerComponent
       dropdownMenu.style.display = 'none';
     }
   }
-
+  requestNotificationPermission() {
+    if ('Notification' in window) {
+      Notification.requestPermission().then((permission) => {
+        if (permission === 'granted') {
+          console.log('Notification permission granted.');
+        } else {
+          console.log('Notification permission denied.');
+        }
+      });
+    } else {
+      console.log('This browser does not support notifications.');
+    }
+  }
+  ngOnDestroy(): void {
+    this.showinputField = false;
+    localStorage.removeItem('receiverEmail');
+    localStorage.removeItem('receiversName');
+    localStorage.removeItem('receiversBio');
+  }
   videoCall() {
     this.router.navigate(['/videoCall']);
   }

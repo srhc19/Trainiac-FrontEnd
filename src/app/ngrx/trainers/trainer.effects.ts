@@ -819,6 +819,23 @@ export class TrainerEffects {
       )
     )
   );
+
+  getMessageSearchResult$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(trainerActions.getMessageSearchResult),
+      mergeMap(({ text }) =>
+        this.trainerService.getMessageSearchResult(text).pipe(
+          map((response) => {
+            let userdata = response.data;
+            return trainerActions.getMessageSearchResultSuccess({ userdata });
+          }),
+          catchError((error) => {
+            return of(trainerActions.getMessageSearchResultFailure({ error }));
+          })
+        )
+      )
+    )
+  );
   constructor(
     private actions$: Actions,
     private trainerService: trainerService,

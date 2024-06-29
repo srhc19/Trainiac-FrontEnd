@@ -9,6 +9,7 @@ import {
   ElementRef,
   OnChanges,
   SimpleChanges,
+  OnDestroy,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -46,7 +47,7 @@ import { GetuserdataService } from '../../../../services/getuserdata.service';
   styleUrl: './chat-system.component.css',
 })
 export class ChatSystemComponent
-  implements OnInit, AfterViewInit, AfterViewChecked
+  implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy
 {
   @ViewChild('chatContainer') private chatContainer!: ElementRef;
   showEmojiPicker = false;
@@ -62,7 +63,7 @@ export class ChatSystemComponent
   showChatList = true;
   showMessages = false;
   isMobile = false;
-
+  showinputField = false;
   constructor(
     private fb: FormBuilder,
     private chatService: ChatSocketService,
@@ -82,6 +83,15 @@ export class ChatSystemComponent
   }
   ngOnInit(): void {
     this.requestNotificationPermission();
+    let locName = localStorage.getItem('receiversName');
+    let locEmail = localStorage.getItem('receiverEmail');
+    let locBio = localStorage.getItem('receiversBio');
+
+    if (locName && locEmail) {
+      let data = { name: locName, Bio: locBio ? locBio : '', email: locEmail };
+      this.displayProfile(data);
+    }
+
     let user_id = this.GetuserdataService.getUserid();
     this.store.dispatch(userActions.getCurrentClient({ user_id }));
     this.store.select(getClientDetails).subscribe((clientDetail) => {
@@ -171,11 +181,18 @@ export class ChatSystemComponent
     this.showEmojiPicker = !this.showEmojiPicker;
   }
   displayProfile(receiverData: { email: string; name: string; Bio: string }) {
+    if (this.messageForm) {
+      this.messageForm.reset();
+    }
+    this.showinputField = true;
     this.name = receiverData.name;
     this.Bio = receiverData.Bio;
     console.log(receiverData, '...');
     this.receiveremail = receiverData.email;
 
+    localStorage.setItem('receiverEmail', receiverData.email);
+    localStorage.setItem('receiversName', receiverData.name);
+    localStorage.setItem('receiversBio', receiverData.Bio);
     let user_id = this.GetuserdataService.getUserid();
     let senderemail = this.GetuserdataService.getEmail();
     let receiverEmail = receiverData.email;
@@ -260,6 +277,12 @@ export class ChatSystemComponent
     } else {
       console.log('This browser does not support notifications.');
     }
+  }
+  ngOnDestroy(): void {
+    this.showinputField = false;
+    localStorage.removeItem('receiverEmail');
+    localStorage.removeItem('receiversName');
+    localStorage.removeItem('receiversBio');
   }
   videoCall() {
     this.router.navigate(['/videoCall']);

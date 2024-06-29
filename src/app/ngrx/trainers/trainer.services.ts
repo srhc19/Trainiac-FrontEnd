@@ -256,4 +256,9 @@ export class trainerService {
       currentuser_id,
     });
   }
+  getMessageSearchResult(text: string) {
+    return this.http.post<any>(`${this.apiUrl}/getMessageSearchResult`, {
+      text,
+    });
+  }
 }

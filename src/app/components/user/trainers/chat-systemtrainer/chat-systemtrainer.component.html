@@ -148,7 +148,7 @@
                         </div>
                       </div>
                       <img
-                        [src]="trainerData.profileimage"
+                        [src]="trainerData.profileimage ||  'assets/profilepicdefault.jpg'"
                         class="object-cover h-10 w-10 rounded-full border-2 border-blue-500 shadow-sm"
                         alt="Sender profile image"
                       />
@@ -172,6 +172,7 @@
                 </div>
               </div>
               <form
+                *ngIf="showinputField"
                 [formGroup]="messageForm"
                 (ngSubmit)="createMessage()"
                 class="p-1 lg:p-3 lg:mt-4 bg-slate-400 rounded-lg shadow-lg"
