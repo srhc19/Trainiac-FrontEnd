@@ -560,7 +560,7 @@ export const addMessageListFailure = createAction(
 );
 export const getMessageSearchResult = createAction(
   '[trainer] get Message Search Result',
-  props<{ text: string }>()
+  props<{ text: string; user_id: string }>()
 );
 export const getMessageSearchResultSuccess = createAction(
   '[trainer] get Message Search Result Success',

@@ -24,8 +24,11 @@
   border: none;
   cursor: pointer;
   outline: none;
+  font-size: 25px;
 }
-
+.navigation-btn:hover {
+  font-weight: bold;
+}
 .current-month,
 .current-year {
   font-size: 1.25rem;

@@ -151,6 +151,7 @@ export class VedioCallSelectClientsComponent implements OnInit {
 
   startVedioSession() {
     if (this.trainerData.premium.paid === true) {
+      console.log('hey');
       let vedioSessionClientsId = this.checkedItemIds;
       let trainer_id = this.GetuserdataService.getUserid();
       let randomid: any = randomID(5);

@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import * as trainerActions from '../../../ngrx/trainers/trainer.action';
 import { ActivatedRoute } from '@angular/router';
 import { getisTrainer } from '../../../ngrx/trainers/trainer.selectors';
+import { GetuserdataService } from '../../../services/getuserdata.service';
 
 // get token
 function generateToken(tokenServerUrl: string, userID: string) {
@@ -50,9 +51,13 @@ export class VedioCallComponent implements OnInit {
   root!: ElementRef;
   paramValue!: string | null;
   isTrainer!: boolean;
-  constructor(private store: Store, private route: ActivatedRoute) {}
+  constructor(
+    private store: Store,
+    private route: ActivatedRoute,
+    private GetuserdataService: GetuserdataService
+  ) {}
   ngOnInit(): void {
-    let trainer_Id = localStorage.getItem('user_id');
+    let trainer_Id = this.GetuserdataService.getUserid();
     if (trainer_Id) {
       this.store.dispatch(trainerActions.checkIfTrainer({ trainer_Id }));
       this.store.select(getisTrainer).subscribe((value) => {
@@ -74,8 +79,8 @@ export class VedioCallComponent implements OnInit {
       const roomID = this.paramValue;
       // const userID = randomID(5);
       // const userName = randomID(5);
-      const userID = localStorage.getItem('user_id');
-      const userName = localStorage.getItem('user_name');
+      const userID = this.GetuserdataService.getUserid();
+      const userName = this.GetuserdataService.getName();
 
       if (userID && userName) {
         // generate token
@@ -121,7 +126,7 @@ export class VedioCallComponent implements OnInit {
     }
   }
   leave() {
-    const trainer_Id = localStorage.getItem('user_id');
+    const trainer_Id = this.GetuserdataService.getUserid();
     if (this.isTrainer && trainer_Id) {
       let randomId = this.paramValue;
       if (randomId) {

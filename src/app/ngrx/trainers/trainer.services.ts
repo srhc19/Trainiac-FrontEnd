@@ -250,15 +250,15 @@ export class trainerService {
     });
   }
   addMessageList(receivers_id: string, currentuser_id: string) {
-    console.log('add to  service');
     return this.http.post<any>(`${this.apiUrl}/addMessageList`, {
       receivers_id,
       currentuser_id,
     });
   }
-  getMessageSearchResult(text: string) {
+  getMessageSearchResult(text: string, user_id: string) {
     return this.http.post<any>(`${this.apiUrl}/getMessageSearchResult`, {
       text,
+      user_id,
     });
   }
 }

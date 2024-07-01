@@ -46,7 +46,7 @@ export class ClientCalenderComponent implements OnInit {
 
       this.store.select(getClientDetails).subscribe((clientDetail) => {
         this.clientDetails = clientDetail;
-        console.log(this.clientDetails);
+
         this.workoutRoutines = this.clientDetails.workoutRoutines;
       });
 

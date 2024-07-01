@@ -56,8 +56,13 @@ export class ChatdisplayComponent {
   Onsubmit() {
     if (this.SearchForm.valid) {
       let text = this.SearchForm.value.text;
+      let user_id = this.GetuserdataService.getUserid();
 
-      // this.store.dispatch(trainerActions.getMessageSearchResult(text));
+      if (user_id) {
+        this.store.dispatch(
+          trainerActions.getMessageSearchResult({ text, user_id })
+        );
+      }
     }
   }
 }

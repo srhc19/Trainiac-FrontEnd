@@ -823,8 +823,8 @@ export class TrainerEffects {
   getMessageSearchResult$ = createEffect(() =>
     this.actions$.pipe(
       ofType(trainerActions.getMessageSearchResult),
-      mergeMap(({ text }) =>
-        this.trainerService.getMessageSearchResult(text).pipe(
+      mergeMap(({ text, user_id }) =>
+        this.trainerService.getMessageSearchResult(text, user_id).pipe(
           map((response) => {
             let userdata = response.data;
             return trainerActions.getMessageSearchResultSuccess({ userdata });

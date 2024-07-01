@@ -11,7 +11,16 @@
 .maincontainer {
   position: relative;
 }
-
+.navigation-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-size: 25px;
+}
+.navigation-btn:hover {
+  font-weight: bold;
+}
 .calendar-header {
   border-radius: 20px;
   color: #555;

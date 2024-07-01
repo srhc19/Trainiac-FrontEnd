@@ -26,4 +26,11 @@ export class GetuserdataService {
       return useremail;
     }
   }
+  getName() {
+    if (this.token) {
+      const decodedToken: any = jwtDecode(this.token);
+      const {username} = decodedToken;
+      return username;
+    }
+  }
 }
