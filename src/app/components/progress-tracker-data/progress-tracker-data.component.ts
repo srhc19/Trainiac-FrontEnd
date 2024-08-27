@@ -29,9 +29,11 @@ export class ProgressTrackerDataComponent implements OnInit {
 
   ngOnInit(): void {
     const user_id = this.route.snapshot.paramMap.get('id');
+    console.log(user_id, 'data in progress tracker');
     if (user_id) {
       this.store.dispatch(trainerAction.getProgressData({ user_id }));
       this.store.select(getProgressData).subscribe((data) => {
+        console.log(data);
         this.progressData = data;
       });
     }

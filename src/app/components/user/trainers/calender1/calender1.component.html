@@ -23,7 +23,7 @@
       </div>
     </div>
   </div>
-  <div class="secondcontainer bg-gray-100">
+  <div class="secondcontainer">
     <div class="pagelinks bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl">
       <div class="links space-y-4">
         <h5 class="link">
@@ -128,7 +128,7 @@
               *ngFor="let list of clientlist; let i = index"
               class="py-1 dropDownClientList"
               role="none"
-              class="flex-row shadow-md g-2 p-2"
+              class="flex-row shadow-md g-2 p-2 hover:bg-slate-100"
             >
               <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
               <div
@@ -153,7 +153,7 @@
         </div>
       </div>
       <!-- <app-addnew-client></app-addnew-client> -->
-      <div class="trainerlist-container bg-gray-50">
+      <div class="trainerlist-container">
         <div class="calendar-container">
           <div class="calendar-header">
             <button class="navigation-btn" (click)="prevMonth()">
@@ -169,7 +169,7 @@
             <div class="calendar-grid flex justify-between">
               <div
                 *ngFor="let day of days"
-                class="calendar-day glass-container"
+                class="calendar-day glass-container bg-white shadow-2xl"
               >
                 <div class="day-header">
                   {{ day }}

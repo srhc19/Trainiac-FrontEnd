@@ -18,7 +18,7 @@
 }
 .messageContainer {
   min-height: 70vh;
-  min-width: 50vw;
+  /* min-width: 50vw; */
   overflow: hidden;
 }
 .pagelinks {
@@ -58,16 +58,6 @@ p {
   font-weight: 500;
   font-style: normal;
 }
-
-/* @media (max-width: 700px) {
-  .pagelinks {
-    display: none;
-  }
-  .content {
-    margin-top: 20px;
-    padding: 5px;
-  }
-} */
 
 .clientlist-container {
   display: flex;
@@ -311,3 +301,22 @@ p {
 .chat_container {
   min-height: 50vh;
 }
+
+/* @media (min-width: 725px) and (max-width: 895px) {
+  .chat_container {
+    max-width: 350px;
+    scrollbar-width: none;
+  }
+}
+@media (min-width: 895px) and (max-width: 1450px) {
+  .chat_container {
+    max-width: 400px;
+    scrollbar-width: none;
+  }
+}
+@media (min-width: 980px) and (max-width: 1150px) {
+  .chat_container {
+    max-width: 450px;
+    scrollbar-width: none;
+  }
+} */

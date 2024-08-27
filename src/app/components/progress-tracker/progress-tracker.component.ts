@@ -109,6 +109,7 @@ export class ProgressTrackerComponent implements OnInit {
         formData.append('user_id', user_id);
         this.store.dispatch(trainerAction.addProgress({ formData }));
         this.progressForm.reset();
+        this.toastr.success('data submitted');
       }
     } else {
       this.progressForm.markAllAsTouched();

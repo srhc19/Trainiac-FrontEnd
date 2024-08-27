@@ -499,7 +499,7 @@ export class TrainerEffects {
             return trainerActions.addProgressSuccess(blogAdded);
           }),
           catchError((error) => {
-            this.toastr.success(error.error.message);
+            this.toastr.error(error.error.message);
             return of(trainerActions.addProgressFailure({ error }));
           })
         )

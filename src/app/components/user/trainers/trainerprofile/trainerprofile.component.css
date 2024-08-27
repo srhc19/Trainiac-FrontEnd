@@ -24,8 +24,8 @@
 }
 /* profile */
 .profileImage {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -38,6 +38,7 @@
   max-height: 300px;
   overflow: hidden;
   border-radius: 10px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
 }
 .imageconatiner {
   max-width: 600px;
@@ -64,11 +65,12 @@
   object-fit: cover;
 }
 .userprofile {
-  max-width: 1200px;
+  /* max-width: 1200px; */
+  background-color: yellowgreen;
   border-radius: 10px;
   overflow: hidden;
   max-height: 300px;
-  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0 7px rgba(0, 0, 0, 0.1); */
   transition: box-shadow 0.5s ease;
 }
 .userprofile:hover {
@@ -153,7 +155,7 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  background-color: white;
+  /* background-color: white; */
   border-radius: 10px;
   height: 88vh;
 }
@@ -384,38 +386,45 @@ a:hover {
 }
 
 @media (min-width: 700px) and (max-width: 1200px) {
+  .newcontainer {
+    margin: 30px;
+  }
   .trainerCredentialsContainer {
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
-    max-width: 480px;
-    margin-left: 20px;
+    /* max-width: 480px; */
+    margin-left: 30px;
   }
   .bannerImg {
     display: none;
   }
-  .userprofile {
+  /* .userprofile {
     margin-left: 40px;
-  }
+  } */
 }
 @media (min-width: 800px) and (max-width: 1200px) {
   .userprofile {
     margin-left: 130px;
   }
 }
-@media (max-width: 700px) {
-  .userprofile {
+@media (min-width: 850px) and (max-width: 1025px) {
+  .userprofileContainer {
+    margin-left: 30px;
+  }
+  .descriptionContainer {
+    margin-right: 40px;
+  }
+}
+@media (max-width: 850px) {
+  /* .userprofile {
     margin-left: 40px;
     margin-right: 110px;
-    /* min-width: 400px; */
-  }
-  /* 
-  .userprofileContainer {
-    max-width: 80vw;
-    height: auto;
   } */
+
   .descriptionContainer {
     min-width: 400px;
+    margin-right: 40px;
   }
   .link-btn {
     font-size: 10px;
@@ -437,9 +446,9 @@ a:hover {
   .testimonialP {
     margin-left: 50px;
   }
-  .maincontainer {
+  /* .maincontainer {
     margin-left: 10px;
-  }
+  } */
   .clientimg {
     display: none;
   }
@@ -453,12 +462,15 @@ a:hover {
   .testimonialsContent p {
     max-width: 70vw;
   }
+  /* .userprofileContainer {
+    /* max-width: 480px; */
+  /* } */
   .trainerCredentialsContainer {
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
-    max-width: 80vw;
-    margin-right: 180px;
+    /* max-width: 80vw; */
+    /* margin-right: 180px; */
   }
   .profileImage {
     width: 100px;
@@ -513,8 +525,42 @@ a:hover {
   .dropdown-menu button:hover {
     background-color: #575757;
   }
-  /* .profileImageContainer {
-    margin-left: 10px;
-    margin-right: 10px;
-  }*/
+}
+@media (min-width: 1203px) and (max-width: 1400px) {
+  .descriptionContainer {
+    margin-right: 40px;
+  }
+  .userprofileContainer {
+    margin-left: 30px;
+  }
+  /* .bannerImg {
+    width: 90%;
+    height: auto;
+    object-fit: cover;
+  } */
+  .newcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+  }
+  .profileImage {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+.newcontainer {
+  display: flex;
+  align-items: center;
+}
+.maincontainer {
+  background-color: #eef7ff;
+}
+.linksContainer,
+.userprofileContainer,
+.testimonialsContainer,
+.certificatesContainer {
+  background-color: #fff;
 }

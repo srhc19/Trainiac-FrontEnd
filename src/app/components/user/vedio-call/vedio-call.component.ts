@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 import { VedioCallInputComponent } from '../vedio-call-input/vedio-call-input.component';
@@ -46,7 +52,7 @@ export function getUrlParams(
   templateUrl: './vedio-call.component.html',
   styleUrl: './vedio-call.component.css',
 })
-export class VedioCallComponent implements OnInit {
+export class VedioCallComponent implements OnInit, OnDestroy {
   @ViewChild('root')
   root!: ElementRef;
   paramValue!: string | null;
@@ -56,6 +62,7 @@ export class VedioCallComponent implements OnInit {
     private route: ActivatedRoute,
     private GetuserdataService: GetuserdataService
   ) {}
+
   ngOnInit(): void {
     let trainer_Id = this.GetuserdataService.getUserid();
     if (trainer_Id) {
@@ -135,5 +142,10 @@ export class VedioCallComponent implements OnInit {
         );
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    console.log('onDestroy works');
+    this.leave();
   }
 }

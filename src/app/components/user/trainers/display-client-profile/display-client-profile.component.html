@@ -19,7 +19,7 @@
   </div>
   <div class="secondContainer mt-4">
     <div class="nav bg-white flex justify-center align-middle navcontainer">
-      <div class="pagelinks">
+      <div class="pagelinks m-2">
         <div class="links space-y-4">
           <h5 class="link">
             <a href="" class="text-gray-400 hover:text-gray-900">Clients</a>
@@ -64,9 +64,9 @@
       </div>
     </div>
     <div class="thirdContainer">
-      <div class="descriptionContainer">
-        <div class="userprofile bg-white gap-7 ml-4">
-          <div class="userprofileContainer">
+      <div class="userprofile bg-white gap-7 ml-4">
+        <div class="userprofileContainer">
+          <div class="newcontainer lg:m-20">
             <div class="profileImageContainer p-4">
               <img
                 class="profileImage"
@@ -76,7 +76,7 @@
                 alt=""
               />
             </div>
-            <div class="userProfileInfo">
+            <div class="userProfileInfo flex flex-col self-center">
               <h1 class="profile-name p-3">{{ name }}</h1>
               <div class="profileInfoContainer">
                 <div class="userbio">
@@ -157,41 +157,42 @@
                 </div>
               </div>
             </div>
-            <div class="imageconatiner">
-              <img
-                class="bannerImg"
-                [src]="clientDetails.bannerImage || 'assets/bannerdefault.jpg'"
-                alt=""
-              />
+          </div>
+
+          <div class="imageconatiner">
+            <img
+              class="bannerImg"
+              [src]="clientDetails.bannerImage || 'assets/bannerdefault.jpg'"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="trainerCredentialsContainer ml-4">
+        <div class="testimonialsContainer bg-white flex-row">
+          <h5>Description</h5>
+          <div class="clientTestimonials">
+            <div class="testimonialsContent">
+              <p class="descriptionContents min-h-24">
+                {{ description ? description : "No Description Added" }}
+              </p>
             </div>
           </div>
         </div>
-
-        <div class="trainerCredentialsContainer ml-4">
-          <div class="testimonialsContainer bg-white flex-row">
-            <h5>Description</h5>
-            <div class="clientTestimonials">
-              <div class="testimonialsContent">
-                <p class="descriptionContents min-h-24">
-                  {{ description ? description : "No Description Added" }}
-                </p>
-              </div>
-            </div>
+        <div class="certificatesContainer bg-white p-4 rounded-lg shadow-md">
+          <h5 class="text-center text-lg font-semibold mb-4">Goals</h5>
+          <div
+            *ngIf="goals.length > 0; else noGoals"
+            class="flex justify-center mt-4"
+          >
+            <ul class="leading-loose text-center">
+              <li *ngFor="let goal of goals" class="mb-2">{{ goal }}</li>
+            </ul>
           </div>
-          <div class="certificatesContainer bg-white p-4 rounded-lg shadow-md">
-            <h5 class="text-center text-lg font-semibold mb-4">Goals</h5>
-            <div
-              *ngIf="goals.length > 0; else noGoals"
-              class="flex justify-center mt-4"
-            >
-              <ul class="leading-loose text-center">
-                <li *ngFor="let goal of goals" class="mb-2">{{ goal }}</li>
-              </ul>
-            </div>
-            <ng-template #noGoals>
-              <p class="text-center">No goals available.</p>
-            </ng-template>
-          </div>
+          <ng-template #noGoals>
+            <p class="text-center">No goals available.</p>
+          </ng-template>
         </div>
       </div>
     </div>

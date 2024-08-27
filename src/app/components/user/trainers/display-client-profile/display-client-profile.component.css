@@ -60,7 +60,7 @@
   object-fit: cover;
 }
 .userprofile {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   border-radius: 10px;
   overflow: hidden;
   max-height: 300px;
@@ -187,7 +187,7 @@
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  margin-left: 270px;
+  margin-left: 200px;
 }
 /* Description */
 .descriptionContainer {
@@ -235,7 +235,7 @@
   font-family: "Lora", serif;
   color: #555;
   font-size: 15px;
-  max-height: 250px;
+  /* max-height: 250px; */
 }
 h5 {
   font-size: 15px;
@@ -272,7 +272,7 @@ h5 {
   font-family: "Lora", serif;
   color: #555;
   font-size: 15px;
-  max-height: 250px;
+  /* max-height: 250px; */
   overflow: hidden;
 }
 
@@ -319,10 +319,19 @@ h5 {
 }
 @media (min-width: 1200px) and (max-width: 1400px) {
   .imageconatiner {
-    max-width: 400px;
+    max-width: 450px;
   }
-  .bannerImg {
+  /* .bannerImg {
     display: none;
+  } */
+}
+@media (min-width: 700px) and (max-width: 1025px) {
+  .userprofileContainer {
+    margin: 40px;
+  }
+  .newcontainer {
+    margin-left: 40px;
+    margin-right: 40px;
   }
 }
 @media (min-width: 700px) and (max-width: 1200px) {
@@ -332,8 +341,20 @@ h5 {
   .bannerImg {
     display: none;
   }
+  /* .newcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+  } */
   .userprofile {
-    margin-left: 90px;
+    max-width: 550px;
+  }
+  .profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
   }
   .trainerCredentialsContainer {
     display: grid;
@@ -341,7 +362,7 @@ h5 {
     gap: 40px;
     max-width: 550px;
 
-    margin-left: 90px;
+    margin-left: 20px;
   }
   .descriptionContents {
     font-size: 11px;
@@ -349,6 +370,9 @@ h5 {
 }
 
 @media (max-width: 700px) {
+  .userprofileContainer {
+    margin: 35px;
+  }
   .descriptionContents {
     font-size: 11px;
     overflow: hidden;
@@ -397,8 +421,8 @@ h5 {
     margin-left: 20px;
   }
   .profileImage {
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     object-fit: cover;
   }
@@ -450,6 +474,27 @@ h5 {
     background-color: #575757;
   }
 }
+@media (min-width: 1200px) and (max-width: 1400px) {
+  .newcontainer {
+    margin: 75px;
+  }
+  .trainerCredentialsContainer {
+    padding: 10px;
+  }
+  .profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
 .displayMessage {
   display: none;
+}
+.newcontainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  align-self: center;
 }

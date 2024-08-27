@@ -151,11 +151,10 @@ export class VedioCallSelectClientsComponent implements OnInit {
 
   startVedioSession() {
     if (this.trainerData.premium.paid === true) {
-      console.log('hey');
       let vedioSessionClientsId = this.checkedItemIds;
       let trainer_id = this.GetuserdataService.getUserid();
       let randomid: any = randomID(5);
-      if (trainer_id) {
+      if (trainer_id && vedioSessionClientsId.length > 0) {
         this.store.dispatch(
           trainerAction.startVedioSession({
             vedioSessionClientsId,
@@ -166,6 +165,8 @@ export class VedioCallSelectClientsComponent implements OnInit {
         // localStorage.setItem('vedioSessionIds',vedioSessionClientsId)
         // window.location.reload();
         this.router.navigate(['/videoCall', randomid]);
+      } else {
+        this.toastr.error('select atleast oneclients');
       }
     } else {
       this.toastr.error('you need premium accound to start vedio call');

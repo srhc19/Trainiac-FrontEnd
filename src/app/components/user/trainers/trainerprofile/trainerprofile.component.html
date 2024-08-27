@@ -25,7 +25,7 @@
     </div>
   </div>
   <div class="secondContainer mt-4 lg:mr-50">
-    <div class="nav bg-white flex justify-center align-middle linksContainer">
+    <div class="nav  flex justify-center align-middle linksContainer">
       <div class="pagelinks mx-3">
         <div class="links space-y-4">
           <h5 class="link">
@@ -84,8 +84,8 @@
     </div>
     <div class="thirdContainer">
       <div class="descriptionContainer">
-        <div class="userprofile gap-7 bg-white">
-          <div class="userprofileContainer p-3">
+        <div class="userprofileContainer ml-4 lg:ml-8">
+          <div class="newcontainer">
             <div class="profileImageContainer p-4">
               <img
                 class="profileImage"
@@ -208,71 +208,70 @@
                 </div> -->
               </div>
             </div>
-            <div class="imageconatiner">
-              <img
-                class="bannerImg"
-                [src]="trainerData.bannerImage || 'assets/bannerdefault.jpg'"
-                alt=""
-              />
-            </div>
+          </div>
+          <div class="imageconatiner">
+            <img
+              class="bannerImg"
+              [src]="trainerData.bannerImage || 'assets/bannerdefault.jpg'"
+              alt=""
+            />
           </div>
         </div>
-      </div>
-      <div class="trainerCredentialsContainer ml-7">
-        <div class="testimonialsContainer bg-white flex-row">
-          <h5>Description</h5>
-          <div class="testimonialsContent">
-            <ng-container *ngIf="trainerData.description; else noDescription">
-              <div>
-                <p>{{ trainerData.description }}</p>
-              </div>
-            </ng-container>
-            <ng-template #noDescription>
-              <p>No description available.</p>
+        <div class="trainerCredentialsContainer ml-7">
+          <div class="testimonialsContainer  flex-row">
+            <h5>Description</h5>
+            <div class="testimonialsContent">
+              <ng-container *ngIf="trainerData.description; else noDescription">
+                <div>
+                  <p>{{ trainerData.description }}</p>
+                </div>
+              </ng-container>
+              <ng-template #noDescription>
+                <p>No description available.</p>
+              </ng-template>
+            </div>
+          </div>
+
+          <div class="certificatesContainer ">
+            <h5>Skills</h5>
+            <div
+              class="imageContainer"
+              *ngIf="trainerData.skills.length > 0; else noSkills"
+            >
+              <ul *ngFor="let skill of trainerData.skills">
+                <li>{{ skill }}</li>
+              </ul>
+            </div>
+            <ng-template #noSkills>
+              <p>No skills available.</p>
             </ng-template>
           </div>
         </div>
-
-        <div class="certificatesContainer bg-white">
-          <h5>Skills</h5>
-          <div
-            class="imageContainer"
-            *ngIf="trainerData.skills.length > 0; else noSkills"
-          >
-            <ul *ngFor="let skill of trainerData.skills">
-              <li>{{ skill }}</li>
-            </ul>
-          </div>
-          <ng-template #noSkills>
-            <p>No skills available.</p>
-          </ng-template>
-        </div>
-      </div>
-      <div class="trainerCredentialsContainer ml-7">
-        <div class="testimonialsContainer bg-white flex-row">
-          <div class="flex flex-row justify-between align-middle">
-            <h5>Testimonials</h5>
-            <button
-              class="btn-style link-btn"
-              *ngIf="isClient"
-              (click)="addReview()"
-            >
-              Add Review
-            </button>
-          </div>
-          <div
-            class="clientTestimonials"
-            *ngIf="trainerData.testimonials.length > 0; else noTestimonials"
-          >
-            <div class="testimonialcontentflex flex-col overflow-y-scroll">
-              <div
-                class="flex flex-row g-2 align-middle"
-                *ngFor="let data of trainerData.testimonials"
+        <div class="trainerCredentialsContainer ml-7">
+          <div class="testimonialsContainer flex-row">
+            <div class="flex flex-row justify-between align-middle">
+              <h5>Testimonials</h5>
+              <button
+                class="btn-style link-btn"
+                *ngIf="isClient"
+                (click)="addReview()"
               >
+                Add Review
+              </button>
+            </div>
+            <div
+              class="clientTestimonials"
+              *ngIf="trainerData.testimonials.length > 0; else noTestimonials"
+            >
+              <div class="testimonialcontentflex flex-col overflow-y-scroll">
                 <div
-                  class="testimonydata flex flex-row justify-between lg:my-5 mr-2"
+                  class="flex flex-row g-2 align-middle"
+                  *ngFor="let data of trainerData.testimonials"
                 >
-                  <!-- <img
+                  <div
+                    class="testimonydata flex flex-row justify-between lg:my-5 mr-2"
+                  >
+                    <!-- <img
                     class="clientimg mr-3"
                     [src]="
                       data.certificateImages || 'assets/profilepicdefault.jpg'
@@ -280,41 +279,42 @@
                     alt=""
                   /> -->
 
-                  <div class="font-bold sm:font-semibold">
-                    {{ data.name }} :
-                  </div>
-                  <div class="ml-6 testimonialP font-normal">
-                    {{ data.content }}
+                    <div class="font-bold sm:font-semibold">
+                      {{ data.name }} :
+                    </div>
+                    <div class="ml-6 testimonialP font-normal">
+                      {{ data.content }}
+                    </div>
                   </div>
                 </div>
               </div>
+              <!-- <a href="">View More</a> -->
             </div>
-            <!-- <a href="">View More</a> -->
+            <ng-template #noTestimonials>
+              <p>No testimonials available.</p>
+            </ng-template>
           </div>
-          <ng-template #noTestimonials>
-            <p>No testimonials available.</p>
-          </ng-template>
-        </div>
-        <div class="certificatesContainer bg-white overflow-y-scroll">
-          <h5>Certificates</h5>
-          <div
-            class="imageContainer"
-            *ngIf="
-              trainerData.certificateImages.length > 0;
-              else noCertificates
-            "
-          >
-            <div *ngFor="let data of trainerData.certificateImages">
-              <img
-                class="certificate mr-3"
-                [src]="data"
-                alt="Certificate Image"
-              />
+          <div class="certificatesContainer  overflow-y-scroll">
+            <h5>Certificates</h5>
+            <div
+              class="imageContainer"
+              *ngIf="
+                trainerData.certificateImages.length > 0;
+                else noCertificates
+              "
+            >
+              <div *ngFor="let data of trainerData.certificateImages">
+                <img
+                  class="certificate mr-3"
+                  [src]="data"
+                  alt="Certificate Image"
+                />
+              </div>
             </div>
+            <ng-template #noCertificates>
+              <p>No certificates available.</p>
+            </ng-template>
           </div>
-          <ng-template #noCertificates>
-            <p>No certificates available.</p>
-          </ng-template>
         </div>
       </div>
     </div>

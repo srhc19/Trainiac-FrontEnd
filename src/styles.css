@@ -12,8 +12,8 @@ body {
   padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
-  background-color: #f7f5f4;
-  /* background-color: #f9fafb; */
+  /* background-color: #f7f5f4; */
+  background-color: #eef7ff;
 }
 
 .btn-style {

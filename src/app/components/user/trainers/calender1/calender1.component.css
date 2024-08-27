@@ -1,7 +1,7 @@
 .calendar-container {
   max-width: 1200px;
   /* margin: 0 auto; */
-  overflow: hidden;
+  overflow-x: scroll;
 }
 
 /* .calendar {
@@ -139,11 +139,14 @@ input[type="text"] {
   display: flex;
   flex-direction: column;
   /* margin-top: 50px; */
+
   padding: 30px;
   background-color: white;
   border-radius: 10px;
   margin-right: 10px;
   margin-bottom: 20px;
+  padding: 30px;
+  margin-left: 10px;
 }
 .pagelinks {
   margin-left: 20px;
@@ -200,6 +203,8 @@ p {
   display: flex;
   gap: 20px;
   padding: 10px;
+  background-color: #eef7ff;
+  border-radius: 9px;
 }
 
 .link {
@@ -340,7 +345,67 @@ p {
 .pagelinks {
   display: flex;
 }
-@media (max-width: 900px) {
+@media (min-width: 850px) and (max-width: 900px) {
+  /* .add-task {
+    display: flex;
+    flex-direction: column;
+  } */
+  .dropDownClientList {
+    font-size: 15px;
+  }
+  .calendar-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  td {
+    font-size: 13px;
+  }
+  .viewbtn {
+    font-size: 12px;
+    padding: 5px;
+  }
+  .pagelinks {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+
+  .dropdown-menu {
+    display: none;
+    font-family: "Lora", serif;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    margin-right: 20px;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    width: 200px;
+    border-radius: 8px;
+  }
+
+  .dropdown-menu a,
+  .dropdown-menu button {
+    color: #333;
+    font-family: "Lora", serif;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-menu a:hover,
+  .dropdown-menu button:hover {
+    background-color: #575757;
+  }
+  .content {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    margin-left: 35px;
+  }
+}
+@media (max-width: 850px) {
   .add-task {
     display: flex;
     flex-direction: column;
@@ -398,6 +463,17 @@ p {
     align-self: center;
     justify-content: center;
     margin-left: 35px;
+  }
+}
+@media (min-width: 900px) and (max-width: 1450px) {
+  .calendar-grid {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-around;
+  }
+  .trainerlist-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   }
 }
 

@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, HostListener, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  HostListener,
+  AfterViewInit,
+  AfterContentInit,
+  AfterContentChecked,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -17,8 +24,10 @@ import { GetuserdataService } from '../../../../services/getuserdata.service';
   templateUrl: './clientslist.component.html',
   styleUrl: './clientslist.component.css',
 })
-export class ClientslistComponent implements OnInit {
-  clientlist!: Array<any>;
+export class ClientslistComponent
+  implements OnInit, AfterContentInit, AfterContentChecked
+{
+  clientlist: Array<any> = [];
   startIndex: number = 0;
   trainerData!: any;
   searchQuery: string = '';
@@ -26,6 +35,7 @@ export class ClientslistComponent implements OnInit {
   itemsPerPage: number = 10;
   totalItems: number = 10;
   dropdownVisible = false;
+  _id!: String;
 
   constructor(
     private store: Store,
@@ -34,7 +44,19 @@ export class ClientslistComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getdata();
+  }
+  ngAfterContentInit(): void {
+    if (!this._id) {
+      this.getdata();
+      window.location.reload();
+    }
+  }
+
+  getdata() {
     let user_id = this.GetuserdataService.getUserid();
+    this._id = user_id;
+    console.log(user_id, 'user_id in  clientlist');
 
     this.store.dispatch(userActions.getCurrentTrainer({ user_id }));
 
@@ -58,7 +80,12 @@ export class ClientslistComponent implements OnInit {
   performSearch() {
     this.searchFunction(this.searchQuery);
   }
-
+  ngAfterContentChecked(): void {
+    if (!this._id) {
+      this.getdata();
+      window.location.reload();
+    }
+  }
   searchFunction(query: string) {
     console.log(query);
     if (query !== '') {
