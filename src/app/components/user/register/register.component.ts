@@ -7,12 +7,12 @@ import { Store } from '@ngrx/store';
 import * as userActions from '../../../ngrx/userauth/user.action';
 import { userReducer } from '../../../ngrx/userauth/user.reducers';
 import { getmessage } from '../../../ngrx/userauth/user.selectors';
-import { RecaptchaModule } from 'ng-recaptcha';
+// import { RecaptchaModule } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, CommonModule, RecaptchaModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
@@ -40,10 +40,10 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
-  onCaptchaResolved(response: any): void {
-    this.captchaResponse = response;
-    this.captchaResolved = true;
-  }
+  // onCaptchaResolved(response: any): void {
+  //   this.captchaResponse = response;
+  //   this.captchaResolved = true;
+  // }
 
   updateRole(event: any) {
     this.formData.role = event.target.value;
@@ -51,11 +51,7 @@ export class RegisterComponent implements OnInit {
 
   // this.captchaResolved
   onSubmit() {
-    if (
-      this.formData.name !== '' &&
-      this.formData.email !== '' &&
-      this.captchaResolved
-    ) {
+    if (this.formData.name !== '' && this.formData.email !== '') {
       this.isLoading = true;
       this.store.dispatch(
         userActions.register({
