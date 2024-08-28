@@ -51,7 +51,11 @@ export class RegisterComponent implements OnInit {
 
   // this.captchaResolved
   onSubmit() {
-    if (this.formData.name !== '' && this.formData.email !== '') {
+    if (
+      this.formData.name !== '' &&
+      this.formData.email !== '' &&
+      this.captchaResolved
+    ) {
       this.isLoading = true;
       this.store.dispatch(
         userActions.register({
