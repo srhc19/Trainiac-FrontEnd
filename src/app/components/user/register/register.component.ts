@@ -48,12 +48,10 @@ export class RegisterComponent implements OnInit {
   updateRole(event: any) {
     this.formData.role = event.target.value;
   }
+
+  // this.captchaResolved
   onSubmit() {
-    if (
-      this.formData.name !== '' &&
-      this.formData.email !== '' &&
-      this.captchaResolved
-    ) {
+    if (this.formData.name !== '' && this.formData.email !== '') {
       this.isLoading = true;
       this.store.dispatch(
         userActions.register({
