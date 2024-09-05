@@ -63,6 +63,7 @@ export class Calender1Component implements OnInit {
   currentClient!: string;
   dropdownVisible = false;
   trainerData!: any;
+  currentClientName!: string;
 
   //dropdown & modal
   dropdownfunction: boolean = true;
@@ -275,9 +276,12 @@ export class Calender1Component implements OnInit {
     });
   }
 
-  getnewClientsDetails(user_id: any) {
+  getnewClientsDetails(user_id: any, name?: string) {
     this.store.dispatch(userActions.getCurrentClient({ user_id }));
     this.dropdownfunction = !this.dropdownfunction;
+    if (name) {
+      this.currentClientName = name;
+    }
   }
   toggleDropdown() {
     this.dropdownVisible = !this.dropdownVisible;

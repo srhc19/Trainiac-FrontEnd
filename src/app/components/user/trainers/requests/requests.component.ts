@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -15,7 +22,7 @@ import { GetuserdataService } from '../../../../services/getuserdata.service';
   templateUrl: './requests.component.html',
   styleUrl: './requests.component.css',
 })
-export class RequestsComponent implements OnInit {
+export class RequestsComponent implements OnInit, OnChanges {
   searchQuery: string = '';
   trainerData!: any;
   requestList!: any[];
@@ -23,7 +30,8 @@ export class RequestsComponent implements OnInit {
   constructor(
     private router: Router,
     private store: Store,
-    private GetuserdataService: GetuserdataService
+    private GetuserdataService: GetuserdataService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -72,8 +80,9 @@ export class RequestsComponent implements OnInit {
       this.store.dispatch(
         trainerAction.acceptClientRequest({ client_id, trainer_id })
       );
+      // this.refreshRequestList(trainer_id);
       this.updateRequestList(client_id, true);
-      this.refreshRequestList(trainer_id);
+      this.cd.detectChanges();
     }
   }
   RemoveRequest(client_id: string) {
@@ -83,8 +92,9 @@ export class RequestsComponent implements OnInit {
       this.store.dispatch(
         trainerAction.removeClientRequest({ client_id, trainer_id })
       );
-      this.updateRequestList(client_id, true);
-      this.refreshRequestList(trainer_id);
+      // this.refreshRequestList(trainer_id);
+      this.updateRequestList(client_id, false);
+      this.cd.detectChanges();
     }
   }
   toggleDropdown() {
@@ -153,14 +163,21 @@ export class RequestsComponent implements OnInit {
       return data;
     });
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    let trainer_id = this.GetuserdataService.getUserid();
 
+    this.refreshRequestList(trainer_id);
+  }
   refreshRequestList(trainer_id: string): void {
+    console.log('refreshlist called');
     this.store.dispatch(
       trainerAction.getclientsRequest({ user_id: trainer_id })
     );
 
     this.store.select(getclientRequestList).subscribe((data) => {
       this.requestList = data;
+      console.log('req updated');
     });
   }
+  clientlist() {}
 }

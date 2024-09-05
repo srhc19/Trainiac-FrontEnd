@@ -133,14 +133,14 @@
               <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
               <div
                 *ngIf="clientlist"
-                (click)="getnewClientsDetails(list.client_id)"
+                (click)="getnewClientsDetails(list.client_id, list.name)"
               >
                 <span class="mr-2">{{ i + 1 }}.</span>{{ list.name }}
               </div>
               <div
                 class="ml-4"
                 *ngIf="clientlist"
-                (click)="getnewClientsDetails(list.client_id)"
+                (click)="getnewClientsDetails(list.client_id, list.name)"
               >
                 {{ list.email }}
               </div>
@@ -171,14 +171,15 @@
                 *ngFor="let day of days"
                 class="calendar-day glass-container bg-white shadow-2xl"
               >
-                <div class="day-header">
-                  {{ day }}
+                <div class="day-header w-max[100px]">
+                  {{ day }}/{{ currentMonth }}/{{ currentYear }}
+
                   <span class="ml-6"
                     ><button
                       (click)="removeWorkout(day)"
                       class="btn-style link-btn"
                     >
-                      Remove Workout
+                      Remove
                     </button></span
                   >
                 </div>
@@ -347,6 +348,7 @@
 <app-cardio-modal
   id="cardioModal"
   [class.hidden]="cardioModal"
+  [selectedClient]="currentClientName"
   (closemodal)="closeCardioModal()"
 ></app-cardio-modal>
 <app-gym-modal

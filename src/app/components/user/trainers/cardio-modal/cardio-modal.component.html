@@ -69,7 +69,25 @@
               id="cardioDuration"
               formControlName="duration"
               min="0"
+              max="180"
             />
+          </div>
+          <div
+            *ngIf="
+              cardioForm.controls['duration'].invalid &&
+              cardioForm.controls['duration'].touched
+            "
+            class="text-red-500"
+          >
+            <small *ngIf="cardioForm.controls['duration'].errors?.['required']">
+              Duration is required.
+            </small>
+            <small *ngIf="cardioForm.controls['duration'].errors?.['min']">
+              Duration must be at least 0 minutes.
+            </small>
+            <small *ngIf="cardioForm.controls['duration'].errors?.['max']">
+              Duration cannot be more than 180 minutes.
+            </small>
           </div>
         </form>
       </div>

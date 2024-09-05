@@ -161,7 +161,7 @@ export class ChatSystemTrainerComponent
   }
   addEmoji(event: any) {
     const emoji = event.emoji.native;
-    const message = this.messageForm.controls['message'].value;
+    const message = this.messageForm.controls['message'].value || '';
     this.messageForm.controls['message'].setValue(message + emoji);
     this.showEmojiPicker = false;
   }

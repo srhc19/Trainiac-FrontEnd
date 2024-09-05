@@ -25,7 +25,7 @@
     </div>
   </div>
   <div class="secondContainer mt-4 lg:mr-50">
-    <div class="nav  flex justify-center align-middle linksContainer">
+    <div class="nav flex justify-center align-middle linksContainer">
       <div class="pagelinks mx-3">
         <div class="links space-y-4">
           <h5 class="link">
@@ -88,6 +88,7 @@
           <div class="newcontainer">
             <div class="profileImageContainer p-4">
               <img
+                loading="lazy"
                 class="profileImage"
                 [src]="
                   trainerData.profileimage || 'assets/profilepicdefault.jpg'
@@ -211,6 +212,7 @@
           </div>
           <div class="imageconatiner">
             <img
+              loading="lazy"
               class="bannerImg"
               [src]="trainerData.bannerImage || 'assets/bannerdefault.jpg'"
               alt=""
@@ -218,7 +220,7 @@
           </div>
         </div>
         <div class="trainerCredentialsContainer ml-7">
-          <div class="testimonialsContainer  flex-row">
+          <div class="testimonialsContainer flex-row">
             <h5>Description</h5>
             <div class="testimonialsContent">
               <ng-container *ngIf="trainerData.description; else noDescription">
@@ -232,7 +234,7 @@
             </div>
           </div>
 
-          <div class="certificatesContainer ">
+          <div class="certificatesContainer">
             <h5>Skills</h5>
             <div
               class="imageContainer"
@@ -294,7 +296,7 @@
               <p>No testimonials available.</p>
             </ng-template>
           </div>
-          <div class="certificatesContainer  overflow-y-scroll">
+          <div class="certificatesContainer overflow-y-scroll">
             <h5>Certificates</h5>
             <div
               class="imageContainer"
@@ -305,6 +307,7 @@
             >
               <div *ngFor="let data of trainerData.certificateImages">
                 <img
+                  loading="lazy"
                   class="certificate mr-3"
                   [src]="data"
                   alt="Certificate Image"

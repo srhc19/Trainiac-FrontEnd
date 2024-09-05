@@ -61,7 +61,8 @@
         </h5>
         <button
           class="btn-style link-btn bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded"
-        (click)="logout()">
+          (click)="logout()"
+        >
           Logout
         </button>
       </div>
@@ -117,9 +118,24 @@
             </td>
             <td class="table-cell" data-label="Images">
               <div class="flex flex-col g-6">
-                <img class="image" [src]="progress.frontPhoto" alt="Front" />
-                <img class="image" [src]="progress.sidePhoto" alt="Side" />
-                <img class="image" [src]="progress.backPhoto" alt="Back" />
+                <img
+                  loading="lazy"
+                  class="image"
+                  [src]="progress.frontPhoto"
+                  alt="Front"
+                />
+                <img
+                  loading="lazy"
+                  class="image"
+                  [src]="progress.sidePhoto"
+                  alt="Side"
+                />
+                <img
+                  loading="lazy"
+                  class="image"
+                  [src]="progress.backPhoto"
+                  alt="Back"
+                />
               </div>
             </td>
             <td class="table-cell" data-label="Weight (kg)">
@@ -235,7 +251,8 @@
       >
       <button
         class="w-full text-left px-4 py-2 bg-red-600 hover:bg-red-700 text-white"
-      (click)="logout()">
+        (click)="logout()"
+      >
         Logout
       </button>
     </div>

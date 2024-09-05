@@ -69,6 +69,7 @@
           <div class="newcontainer lg:m-20">
             <div class="profileImageContainer p-4">
               <img
+                loading="lazy"
                 class="profileImage"
                 [src]="
                   clientDetails.profileimage || 'assets/profilepicdefault.jpg'
@@ -161,6 +162,7 @@
 
           <div class="imageconatiner">
             <img
+              loading="lazy"
               class="bannerImg"
               [src]="clientDetails.bannerImage || 'assets/bannerdefault.jpg'"
               alt=""
@@ -170,7 +172,10 @@
       </div>
 
       <div class="trainerCredentialsContainer ml-4">
-        <div class="testimonialsContainer bg-white flex-row">
+        <div
+          class="testimonialsContainer bg-white flex-row"
+          *ngIf="description"
+        >
           <h5>Description</h5>
           <div class="clientTestimonials">
             <div class="testimonialsContent">
@@ -180,7 +185,10 @@
             </div>
           </div>
         </div>
-        <div class="certificatesContainer bg-white p-4 rounded-lg shadow-md">
+        <div
+          class="certificatesContainer bg-white p-4 rounded-lg shadow-md"
+          *ngIf="goals.length > 0"
+        >
           <h5 class="text-center text-lg font-semibold mb-4">Goals</h5>
           <div
             *ngIf="goals.length > 0; else noGoals"

@@ -308,3 +308,6 @@ p {
 .container_list {
   min-height: 80vh;
 }
+.chat_container {
+  min-height: 50vh;
+}

@@ -41,7 +41,10 @@ export class YogaModalComponent {
       clientEmail: ['', Validators.required],
       workoutDate: ['', Validators.required],
       activity: ['', Validators.required],
-      duration: ['', [Validators.required, Validators.min(0)]],
+      duration: [
+        '',
+        [Validators.required, Validators.min(0), Validators.max(180)],
+      ],
     });
     let trainerid = this.GetuserdataService.getUserid();
     if (trainerid) {

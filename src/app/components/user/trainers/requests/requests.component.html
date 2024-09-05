@@ -28,7 +28,9 @@
     <div class="pagelinks bg-gray-800 p-6 rounded-lg">
       <div class="links space-y-4">
         <h5 class="link">
-          <a href="" class="text-gray-400 hover:text-white">Clients</a>
+          <a (click)="clientlist()" class="text-gray-400 hover:text-white"
+            >Clients</a
+          >
         </h5>
         <h5 class="link">
           <a (click)="calender()" class="text-gray-400 hover:text-white"
@@ -147,7 +149,7 @@
                 </button>
                 <button
                   *ngIf="items.status"
-                  class="btn bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded"
+                  class="btn btn-style bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded"
                   (click)="
                     RemoveRequest(items.client_id); $event.stopPropagation()
                   "

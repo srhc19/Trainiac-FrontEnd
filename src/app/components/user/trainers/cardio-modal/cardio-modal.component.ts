@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,6 +11,7 @@ import { getlistOfClients } from '../../../../ngrx/trainers/trainer.selectors';
 import { Client } from '../../../../ngrx/trainers/trainer.interface';
 import { CommonModule } from '@angular/common';
 import { GetuserdataService } from '../../../../services/getuserdata.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cardio-modal',
@@ -22,6 +23,7 @@ import { GetuserdataService } from '../../../../services/getuserdata.service';
 export class CardioModalComponent implements OnInit {
   cardioForm!: FormGroup;
   clientlist!: Array<Client>;
+  @Input() selectedClient!: string;
   @Output() closemodal: EventEmitter<void> = new EventEmitter<void>();
 
   initialValue = {
@@ -35,7 +37,8 @@ export class CardioModalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    private GetuserdataService: GetuserdataService
+    private GetuserdataService: GetuserdataService,
+    private toast: ToastrService
   ) {}
   ngOnInit(): void {
     this.cardioForm = this.fb.group({
@@ -43,7 +46,10 @@ export class CardioModalComponent implements OnInit {
       workoutDate: ['', Validators.required],
       activity: ['', Validators.required],
       intensity: ['', Validators.required],
-      duration: ['', [Validators.required, Validators.min(0)]],
+      duration: [
+        '',
+        [Validators.required, Validators.min(0), Validators.max(180)],
+      ],
     });
     let trainerid = this.GetuserdataService.getUserid();
     if (trainerid) {
